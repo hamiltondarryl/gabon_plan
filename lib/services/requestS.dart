@@ -1,6 +1,7 @@
-// ignore_for_file: file_names, non_constant_identifier_names
+// ignore_for_file: file_names, non_constant_identifier_names, avoid_print
 import 'dart:convert';
 import 'package:gabon_plan/models/points.dart';
+import 'package:gabon_plan/models/ville.dart';
 import 'package:http/http.dart' as http;
 
 class RequestHTTP{
@@ -147,6 +148,22 @@ class RequestHTTP{
       return listMedical;
     }else{
       return listMedical;
+    }
+  }
+
+  static Future<List<Ville>> fetchVilles() async {
+
+    var url = Uri.parse(URL_BASIC +"villes.php");
+
+    var request = await http.get(url);
+    List <Ville> listeville = [];
+    if(request.statusCode == 200){
+      var response = jsonDecode(request.body);
+      var datas = response["data"];
+      listeville =  datas.map<Ville>((json) => Ville.fromJson(json)).toList();
+      return listeville;
+    }else{
+      return listeville;
     }
   }
 

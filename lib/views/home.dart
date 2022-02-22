@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:gabon_plan/config/colorsSys.dart';
 import 'package:gabon_plan/config/imagesSys.dart';
+import 'package:gabon_plan/views/gettingData.dart';
 import 'package:gabon_plan/views/listSpeE.dart';
 import 'package:gabon_plan/views/listSpeL.dart';
 import 'package:gabon_plan/views/listspeS.dart';
@@ -31,7 +32,7 @@ class _HomeState extends State<Home> {
             children: [
               Container(
                 padding: const EdgeInsets.symmetric(vertical: 30.0, horizontal: 15.0),
-                height: MediaQuery.of(context).size.height / 2.2,
+                height: 300,
                 width: double.infinity,
                 decoration: BoxDecoration(
                   color: Colors.black,
@@ -66,7 +67,7 @@ class _HomeState extends State<Home> {
                         )
                       ],
                     ),
-                    const SizedBox(height: 40.0),
+                    const SizedBox(height: 20.0),
                     const Text(
                       "Bienvenue sur GabonPlan",
                       style: TextStyle(
@@ -83,7 +84,7 @@ class _HomeState extends State<Home> {
                         style: TextStyle(
                           color: Colors.white,
                           fontWeight: FontWeight.w400,
-                          fontSize: 16.0,
+                          fontSize: 15.0,
                         ),
                       ),
                     )
@@ -102,7 +103,9 @@ class _HomeState extends State<Home> {
                               topRight: Radius.circular(50))),
                       child: Column(
                         children: [
-
+                          TextButton(onPressed: (){
+                                Navigator.push(context, MaterialPageRoute(builder: (context)=> const GettingData()));
+                          }, child: const Text("Clique moi")),
                           Expanded(
                             child: GridView.count(
                               primary: false,

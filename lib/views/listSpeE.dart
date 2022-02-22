@@ -1,6 +1,7 @@
 // ignore_for_file: file_names, avoid_unnecessary_containers
 import 'dart:convert';
 import 'package:gabon_plan/views/search/resultaEducation.dart';
+import 'package:gabon_plan/widgets/dropdownbutton.dart';
 import 'package:http/http.dart' as http;
 import 'package:flutter/material.dart';
 import 'package:gabon_plan/config/colorsSys.dart';
@@ -72,32 +73,37 @@ class _FilterEState extends State<FilterE> {
             const SizedBox(height: 30.0),
             Expanded(
               flex: 1,
-              child: Container(
-                width: double.infinity,
-                padding: const EdgeInsets.symmetric(vertical: 7.0, horizontal: 20.0),
-                color: Colors.black,
-                child: TextFormField(
-                  controller: controller,
-                  autofocus: false,
-                  decoration: InputDecoration(
-                    prefixIcon: const Icon(
-                      Icons.search,
-                      color: Colors.white,
-                    ),
-                    hintText: "Rechercher...",
-                    hintStyle: const TextStyle(color: Colors.white),
-                    filled: true,
-                    fillColor: ColorsSys.colorPog,
-                    enabledBorder: UnderlineInputBorder(
-                      borderRadius: BorderRadius.circular(25.7),
-                      borderSide: BorderSide(color: ColorsSys.colorPog),
-                    ),
-                    focusedBorder: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(25.7),
-                      borderSide: BorderSide(color: ColorsSys.colorPog),
+              child: Row(
+                children: [
+                  Container(
+                    width: 250.0,
+                    padding: const EdgeInsets.symmetric(vertical: 7.0, horizontal: 20.0),
+                    color: Colors.black,
+                    child: TextFormField(
+                      controller: controller,
+                      autofocus: false,
+                      decoration: InputDecoration(
+                        prefixIcon: const Icon(
+                          Icons.search,
+                          color: Colors.white,
+                        ),
+                        hintText: "Rechercher...",
+                        hintStyle: const TextStyle(color: Colors.white),
+                        filled: true,
+                        fillColor: ColorsSys.colorPog,
+                        enabledBorder: UnderlineInputBorder(
+                          borderRadius: BorderRadius.circular(25.7),
+                          borderSide: BorderSide(color: ColorsSys.colorPog),
+                        ),
+                        focusedBorder: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(25.7),
+                          borderSide: BorderSide(color: ColorsSys.colorPog),
+                        ),
+                      ),
                     ),
                   ),
-                ),
+                  VillePageState()
+                ],
               ),
             ),
             Expanded(

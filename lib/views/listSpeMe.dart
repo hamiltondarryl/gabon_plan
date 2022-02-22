@@ -73,32 +73,36 @@ class _FilterMState extends State<FilterM> {
             const SizedBox(height: 30.0),
             Expanded(
               flex: 1,
-              child: Container(
-                width: double.infinity,
-                padding: const EdgeInsets.symmetric(vertical: 7.0, horizontal: 20.0),
-                color: Colors.black,
-                child: TextFormField(
-                  controller: controller,
-                  autofocus: false,
-                  decoration: InputDecoration(
-                    prefixIcon: const Icon(
-                      Icons.search,
-                      color: Colors.white,
-                    ),
-                    hintText: "Rechercher...",
-                    hintStyle: const TextStyle(color: Colors.white),
-                    filled: true,
-                    fillColor: ColorsSys.colorMed,
-                    enabledBorder: UnderlineInputBorder(
-                      borderRadius: BorderRadius.circular(25.7),
-                      borderSide: BorderSide(color: ColorsSys.colorMed),
-                    ),
-                    focusedBorder: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(25.7),
-                      borderSide: BorderSide(color: ColorsSys.colorMed),
+              child: Row(
+                children: [
+                  Container(
+                    width: MediaQuery.of(context).size.width / 1.5,
+                    padding: const EdgeInsets.symmetric(vertical: 7.0, horizontal: 20.0),
+                    color: Colors.black,
+                    child: TextFormField(
+                      controller: controller,
+                      autofocus: false,
+                      decoration: InputDecoration(
+                        prefixIcon: const Icon(
+                          Icons.search,
+                          color: Colors.white,
+                        ),
+                        hintText: "Rechercher...",
+                        hintStyle: const TextStyle(color: Colors.white),
+                        filled: true,
+                        fillColor: ColorsSys.colorMed,
+                        enabledBorder: UnderlineInputBorder(
+                          borderRadius: BorderRadius.circular(25.7),
+                          borderSide: BorderSide(color: ColorsSys.colorMed),
+                        ),
+                        focusedBorder: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(25.7),
+                          borderSide: BorderSide(color: ColorsSys.colorMed),
+                        ),
+                      ),
                     ),
                   ),
-                ),
+                ],
               ),
             ),
             Expanded(

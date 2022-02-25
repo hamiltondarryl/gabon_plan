@@ -3,10 +3,8 @@
 import 'package:flutter/material.dart';
 import 'package:gabon_plan/config/colorsSys.dart';
 import 'package:gabon_plan/helpers/functions.dart';
-import 'package:gabon_plan/services/requestS.dart';
 import 'package:gabon_plan/views/listSpeMe.dart';
 import 'package:gabon_plan/widgets/appbar.dart';
-import 'package:gabon_plan/widgets/cardPharmaListMed.dart';
 import 'package:gabon_plan/widgets/drawer.dart';
 
 class ResultMedical extends StatefulWidget {
@@ -99,7 +97,7 @@ class _ResultMedicalState extends State<ResultMedical> {
                   ],
                 ),
               ),
-              Expanded(
+              /*Expanded(
                 flex: 4,
                 child: Padding(
                     padding: const EdgeInsets.symmetric(horizontal: 20.0),
@@ -148,7 +146,7 @@ class _ResultMedicalState extends State<ResultMedical> {
                           }
                         })
                 ),
-              )
+              )*/
             ],
           )),
     );

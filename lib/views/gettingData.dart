@@ -1,4 +1,4 @@
-// ignore_for_file: file_names, avoid_print, avoid_unnecessary_containers, avoid_function_literals_in_foreach_calls, unused_field
+// ignore_for_file: file_names, avoid_print, avoid_unnecessary_containers, avoid_function_literals_in_foreach_calls, unused_field, sized_box_for_whitespace
 
 import 'package:flutter/material.dart';
 import 'package:gabon_plan/services/requestS.dart';
@@ -15,6 +15,7 @@ class _GettingDataState extends State<GettingData> {
 
   final List<Map<String, dynamic>> _villes = [];
   final List<Map<String, dynamic>> _categories = [];
+  bool loading = false ;
 
   @override
   void initState() {
@@ -30,9 +31,25 @@ class _GettingDataState extends State<GettingData> {
         });
       });
     });
-  }
 
-TextEditingController ville =  TextEditingController();
+    RequestHTTP.fetchCategories(categorie: "medical_cat").then((tableau){
+        setState(() {
+        tableau.forEach((element) {
+          _categories.add({
+            'value': element.id,
+            'label': element.libelle,
+            'icon': const Icon(Icons.ac_unit),
+          });
+        });
+      });
+    });
+
+  }
+  
+
+  TextEditingController ville =  TextEditingController();
+  TextEditingController categorie =  TextEditingController();
+  final _formKey = GlobalKey<FormState>();
 
 
   @override
@@ -40,20 +57,93 @@ TextEditingController ville =  TextEditingController();
 
     return Scaffold(
       body: Container(
-        child: ListView(
-          children:  [
-          SelectFormField(
-              dialogCancelBtn : "Fermer",
-              controller: ville,
-              enableSearch: true,
-              type: SelectFormFieldType.dialog, // or can be dialog
-              icon: const Icon(Icons.format_shapes),
-              labelText: 'Sélectionner une ville',
-              items: _villes,
-              onChanged: (val) => print(val),
-              onSaved: (val) => print(val),
-            )
-          ],
+        padding: const EdgeInsets.only(top : 50, left: 20, right: 20),
+        child: Form(
+          key: _formKey,
+          child: ListView(
+            children:  [
+              Container(
+                 height: 100,
+                 width: double.infinity,
+                 child:  SelectFormField(
+                    dialogCancelBtn : "Fermer",
+                    controller: ville,
+                    validator: (val){
+                        if(val!.isEmpty){
+                            return "Veuiller renseigner la ville";
+                        }
+                        return null;
+                    },
+                    enableSearch: true,
+                    type: SelectFormFieldType.dialog, // or can be dialog
+                    icon: const Icon(Icons.format_shapes),
+                    labelText: 'Sélectionner une ville',
+                    items: _villes,
+                    onChanged: (val){
+                      print("la ville : $val");
+                    },
+                    onSaved: (val) => print(val),
+                     
+                  ),
+               ), 
+                Container(
+                 height: 100,
+                 width: double.infinity,
+                 child:  SelectFormField(
+                    dialogCancelBtn : "Fermer",
+                    controller: categorie,
+                    validator: (val){
+                        if(val!.isEmpty){
+                            return "Veuiller renseigner la spécialité";
+                        }
+                        return null;
+                    },
+                    enableSearch: true,
+                    type: SelectFormFieldType.dialog, // or can be dialog
+                    icon: const Icon(Icons.format_shapes),
+                    labelText: 'Sélectionner une specialité',
+                    items: _categories,
+                    onChanged: (val){
+                      print("la specialite : $val");
+                    },
+                    onSaved: (val) => print(val),
+                    
+                     
+                  ),
+               ),
+        
+               TextButton(
+                 onPressed: () {            
+                    if (_formKey.currentState!.validate()) {
+
+                      setState(() {
+                        loading = !loading;
+                      });
+
+                      ScaffoldMessenger.of(context).showSnackBar(
+                         SnackBar(content: 
+                        Text('la ville : ${ville.text} et la specialité : ${categorie.text}')
+                        ),
+                      );
+                      RequestHTTP.fetchAllFilterMedicalForCity(ville: ville.text, cat: categorie.text).then((resultat) {
+                        setState(() {
+                          loading = !loading;
+                        });
+                          resultat.forEach((element) {
+                            print(element.libelle);
+                          });
+                      });
+
+                    }{
+                       ScaffoldMessenger.of(context).showSnackBar(
+                        const SnackBar(content: Text('Veuiller renseiller tous les champs')),
+                      );
+                    }
+                  
+                 },
+                  child: loading ? const CircularProgressIndicator() : const Text("Rechercher"))
+            ],
+          ),
         ),
       ),
     );

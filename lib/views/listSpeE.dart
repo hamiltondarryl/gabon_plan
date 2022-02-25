@@ -73,37 +73,32 @@ class _FilterEState extends State<FilterE> {
             const SizedBox(height: 30.0),
             Expanded(
               flex: 1,
-              child: Row(
-                children: [
-                  Container(
-                    width: 250.0,
-                    padding: const EdgeInsets.symmetric(vertical: 7.0, horizontal: 20.0),
-                    color: Colors.black,
-                    child: TextFormField(
-                      controller: controller,
-                      autofocus: false,
-                      decoration: InputDecoration(
-                        prefixIcon: const Icon(
-                          Icons.search,
-                          color: Colors.white,
-                        ),
-                        hintText: "Rechercher...",
-                        hintStyle: const TextStyle(color: Colors.white),
-                        filled: true,
-                        fillColor: ColorsSys.colorPog,
-                        enabledBorder: UnderlineInputBorder(
-                          borderRadius: BorderRadius.circular(25.7),
-                          borderSide: BorderSide(color: ColorsSys.colorPog),
-                        ),
-                        focusedBorder: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(25.7),
-                          borderSide: BorderSide(color: ColorsSys.colorPog),
-                        ),
-                      ),
+              child: Container(
+                width: double.infinity,
+                padding: const EdgeInsets.symmetric(vertical: 7.0, horizontal: 20.0),
+                color: Colors.black,
+                child: TextFormField(
+                  controller: controller,
+                  autofocus: false,
+                  decoration: InputDecoration(
+                    prefixIcon: const Icon(
+                      Icons.search,
+                      color: Colors.white,
+                    ),
+                    hintText: "Rechercher...",
+                    hintStyle: const TextStyle(color: Colors.white),
+                    filled: true,
+                    fillColor: ColorsSys.colorPog,
+                    enabledBorder: UnderlineInputBorder(
+                      borderRadius: BorderRadius.circular(25.7),
+                      borderSide: BorderSide(color: ColorsSys.colorPog),
+                    ),
+                    focusedBorder: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(25.7),
+                      borderSide: BorderSide(color: ColorsSys.colorPog),
                     ),
                   ),
-                  VillePageState()
-                ],
+                ),
               ),
             ),
             Expanded(

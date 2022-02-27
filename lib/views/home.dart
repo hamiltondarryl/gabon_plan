@@ -125,7 +125,7 @@ class _HomeState extends State<Home> {
                                     title: "Plan Médical",
                                     color: ColorsSys.colorMed,
                                     image: ImageSys.host,
-                                    page: const ListSpeMe() ),
+                                    page: const GettingData() ),
                                 cardMenu(
                                     context: context,
                                     title: "Plan Loisirs",

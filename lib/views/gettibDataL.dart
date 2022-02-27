@@ -1,38 +1,20 @@
-// ignore_for_file: file_names, avoid_unnecessary_containers
+// ignore_for_file: file_names, avoid_print, avoid_unnecessary_containers, avoid_function_literals_in_foreach_calls, unused_field, sized_box_for_whitespace
 
 import 'package:flutter/material.dart';
-import 'package:gabon_plan/services/requestS.dart';
 import 'package:gabon_plan/config/colorsSys.dart';
+import 'package:gabon_plan/services/requestS.dart';
 import 'package:select_form_field/select_form_field.dart';
 
-class ListSpeMe extends StatefulWidget {
-  const ListSpeMe({Key? key}) : super(key: key);
+class GettingDataL extends StatefulWidget {
+  const GettingDataL({Key? key}) : super(key: key);
 
   @override
-  _ListSpeMeState createState() => _ListSpeMeState();
+  _GettingDataLState createState() => _GettingDataLState();
 }
 
-class _ListSpeMeState extends State<ListSpeMe> {
-  @override
-  Widget build(BuildContext context) {
-    return const FilterM();
-  }
-}
+class _GettingDataLState extends State<GettingDataL> {
 
-class FilterM extends StatefulWidget {
-  const FilterM({Key? key}) : super(key: key);
-
-  @override
-  _FilterMState createState() => _FilterMState();
-}
-
-class _FilterMState extends State<FilterM> {
-  List<Map> listCat = [];
-
-  TextEditingController controller =  TextEditingController();
-  String filter = "";
-
- final List<Map<String, dynamic>> _villes = [];
+  final List<Map<String, dynamic>> _villes = [];
   final List<Map<String, dynamic>> _categories = [];
   bool loading = false ;
 
@@ -51,7 +33,7 @@ class _FilterMState extends State<FilterM> {
       });
     });
 
-    RequestHTTP.fetchCategories(categorie: "medical_cat").then((tableau){
+    RequestHTTP.fetchCategories(categorie: "Loisir_cat").then((tableau){
         setState(() {
         tableau.forEach((element) {
           _categories.add({
@@ -70,21 +52,14 @@ class _FilterMState extends State<FilterM> {
   TextEditingController categorie =  TextEditingController();
   final _formKey = GlobalKey<FormState>();
 
+
   @override
   Widget build(BuildContext context) {
+
     return Scaffold(
         backgroundColor: Colors.black,
-        appBar: AppBar(
-          backgroundColor: ColorsSys.colorMed,
-          title: const Text("Liste des spécialites"),
-        ),
-        body: Container(
-          child: Column(children: [
-            const SizedBox(height: 30.0),
-            Row(
-              children: [
-                Container(
-                   padding: const EdgeInsets.only(top : 50, left: 20, right: 20),
+      body: Container(
+        padding: const EdgeInsets.only(top : 50, left: 20, right: 20),
         child: Form(
           key: _formKey,
           child: ListView(
@@ -93,6 +68,28 @@ class _FilterMState extends State<FilterM> {
                  height: 100,
                  width: double.infinity,
                  child:  SelectFormField(
+                    decoration : InputDecoration(
+                    contentPadding:
+                    const EdgeInsets.symmetric(vertical: 15.0, horizontal: 20.0),
+                    focusedBorder: OutlineInputBorder(
+                      borderSide: BorderSide(color: ColorsSys.colorMed, width: 1.0),
+                      borderRadius: BorderRadius.circular(10.0),
+                    ),
+                    border: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(10.0),
+                        borderSide: const BorderSide(color: Colors.black)),
+                    // ignore: prefer_const_constructors
+                    hintStyle: TextStyle(
+                        color: Colors.white, fontWeight: FontWeight.w500),
+                    enabledBorder: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(10.0),
+                      // ignore: prefer_const_constructors
+                      borderSide: BorderSide(
+                        color: Colors.black,
+                        width: 1.1,
+                      ),
+                    ),
+                  ),
                     dialogCancelBtn : "Fermer",
                     controller: ville,
                     validator: (val){
@@ -117,7 +114,7 @@ class _FilterMState extends State<FilterM> {
                  height: 100,
                  width: double.infinity,
                  child:  SelectFormField(
-                   decoration : InputDecoration(
+                    decoration : InputDecoration(
                     contentPadding:
                     const EdgeInsets.symmetric(vertical: 15.0, horizontal: 20.0),
                     focusedBorder: OutlineInputBorder(
@@ -193,11 +190,8 @@ class _FilterMState extends State<FilterM> {
                   child: loading ? const CircularProgressIndicator() : const Text("Rechercher"))
             ],
           ),
-        )
-                )
-              ],
-            ),  ]),
-        ));
+        ),
+      ),
+    );
   }
-    }
-    
+}

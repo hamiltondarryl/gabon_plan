@@ -1,6 +1,7 @@
 // ignore_for_file: file_names, avoid_print, avoid_unnecessary_containers, avoid_function_literals_in_foreach_calls, unused_field, sized_box_for_whitespace
 
 import 'package:flutter/material.dart';
+import 'package:gabon_plan/config/colorsSys.dart';
 import 'package:gabon_plan/services/requestS.dart';
 import 'package:select_form_field/select_form_field.dart';
 
@@ -56,7 +57,13 @@ class _GettingDataState extends State<GettingData> {
   Widget build(BuildContext context) {
 
     return Scaffold(
+        backgroundColor: Colors.black,
+         appBar: AppBar(
+          backgroundColor: ColorsSys.colorMed,
+          title: const Text("Liste des spécialites"),
+        ),
       body: Container(
+        
         padding: const EdgeInsets.only(top : 50, left: 20, right: 20),
         child: Form(
           key: _formKey,
@@ -66,6 +73,29 @@ class _GettingDataState extends State<GettingData> {
                  height: 100,
                  width: double.infinity,
                  child:  SelectFormField(
+                    decoration : InputDecoration(
+                    contentPadding:
+                    const EdgeInsets.symmetric(vertical: 15.0, horizontal: 20.0),
+                    focusedBorder: OutlineInputBorder(
+                      borderSide: BorderSide(color: ColorsSys.colorMed, width: 1.0),
+                      borderRadius: BorderRadius.circular(10.0),
+                    ),
+                    hintText: 'Choix de la ville',
+                    border: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(10.0),
+                        borderSide: const BorderSide(color: Colors.white)),
+                    // ignore: prefer_const_constructors
+                    hintStyle: TextStyle(
+                        color: Colors.white, fontWeight: FontWeight.w500),
+                    enabledBorder: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(10.0),
+                      // ignore: prefer_const_constructors
+                      borderSide: BorderSide(
+                        color: Colors.white,
+                        width: 1.1,
+                      ),
+                    ),
+                  ),
                     dialogCancelBtn : "Fermer",
                     controller: ville,
                     validator: (val){
@@ -90,6 +120,28 @@ class _GettingDataState extends State<GettingData> {
                  height: 100,
                  width: double.infinity,
                  child:  SelectFormField(
+                    decoration : InputDecoration(
+                    contentPadding:
+                    const EdgeInsets.symmetric(vertical: 15.0, horizontal: 20.0),
+                    focusedBorder: OutlineInputBorder(
+                      borderSide: BorderSide(color: ColorsSys.colorMed, width: 1.0),
+                      borderRadius: BorderRadius.circular(10.0),
+                    ),
+                    border: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(10.0),
+                        borderSide: const BorderSide(color: Colors.black)),
+                    // ignore: prefer_const_constructors
+                    hintStyle: TextStyle(
+                        color: Colors.white, fontWeight: FontWeight.w500),
+                    enabledBorder: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(10.0),
+                      // ignore: prefer_const_constructors
+                      borderSide: BorderSide(
+                        color: Colors.black,
+                        width: 1.1,
+                      ),
+                    ),
+                  ),
                     dialogCancelBtn : "Fermer",
                     controller: categorie,
                     validator: (val){

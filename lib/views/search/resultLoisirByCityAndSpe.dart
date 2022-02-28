@@ -4,25 +4,25 @@ import 'package:flutter/material.dart';
 import 'package:gabon_plan/config/colorsSys.dart';
 import 'package:gabon_plan/helpers/functions.dart';
 import 'package:gabon_plan/models/points.dart';
-import 'package:gabon_plan/views/gettingData.dart';
+import 'package:gabon_plan/views/gettibDataL.dart';
 import 'package:gabon_plan/widgets/appbar.dart';
 import 'package:gabon_plan/widgets/cardPharmaListMed.dart';
 import 'package:gabon_plan/widgets/drawer.dart';
 
-class ResultMedicalByCityAndSpe extends StatefulWidget {
+class ResultLoisirByCityAndSpe extends StatefulWidget {
   final String ville;
   final String categorie;
   final List<PointlModel> data;
 
-  const ResultMedicalByCityAndSpe(
+  const ResultLoisirByCityAndSpe(
       {required this.ville, required this.categorie, required this.data});
 
   @override
-  _ResultMedicalByCityAndSpeState createState() =>
-      _ResultMedicalByCityAndSpeState();
+  _ResultLoisirByCityAndSpeState createState() =>
+      _ResultLoisirByCityAndSpeState();
 }
 
-class _ResultMedicalByCityAndSpeState extends State<ResultMedicalByCityAndSpe> {
+class _ResultLoisirByCityAndSpeState extends State<ResultLoisirByCityAndSpe> {
   TextEditingController controller = TextEditingController();
   String filter = "";
   @override
@@ -45,8 +45,7 @@ class _ResultMedicalByCityAndSpeState extends State<ResultMedicalByCityAndSpe> {
           endDrawer: const Drawer(
             child: CustomDrawer(),
           ),
-          appBar:
-              AppbarCustom(title: "Plan Médical", color: ColorsSys.colorMed),
+          appBar: AppbarCustom(title: "Plan Loisir", color: ColorsSys.colorLoi),
           body: Column(
             children: <Widget>[
               Expanded(
@@ -76,19 +75,19 @@ class _ResultMedicalByCityAndSpeState extends State<ResultMedicalByCityAndSpe> {
                                     context,
                                     MaterialPageRoute(
                                         builder: (context) =>
-                                            const GettingData()));
+                                            const GettingLData()));
                               }),
                           hintText: "Rechercher...",
                           hintStyle: const TextStyle(color: Colors.white),
                           filled: true,
-                          fillColor: ColorsSys.colorMed,
+                          fillColor: ColorsSys.colorLoi,
                           enabledBorder: UnderlineInputBorder(
                             borderRadius: BorderRadius.circular(25.7),
-                            borderSide: BorderSide(color: ColorsSys.colorMed),
+                            borderSide: BorderSide(color: ColorsSys.colorLoi),
                           ),
                           focusedBorder: OutlineInputBorder(
                             borderRadius: BorderRadius.circular(25.7),
-                            borderSide: BorderSide(color: ColorsSys.colorMed),
+                            borderSide: BorderSide(color: ColorsSys.colorLoi),
                           ),
                         ),
                       ),
@@ -107,7 +106,7 @@ class _ResultMedicalByCityAndSpeState extends State<ResultMedicalByCityAndSpe> {
                         child: Text(
                       widget.categorie + ' de ${widget.ville}',
                       style:
-                          TextStyle(color: ColorsSys.colorMed, fontSize: 17.0),
+                          TextStyle(color: ColorsSys.colorLoi, fontSize: 17.0),
                     ))
                   ],
                 ),
@@ -136,7 +135,7 @@ class _ResultMedicalByCityAndSpeState extends State<ResultMedicalByCityAndSpe> {
                                 horaires: widget.data[index].horaires,
                                 jours: widget.data[index].jours,
                                 image: widget.data[index].image,
-                                color: ColorsSys.colorMed)
+                                color: ColorsSys.colorLoi)
                             : const SizedBox.shrink();
                       },
                     )),

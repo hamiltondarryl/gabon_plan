@@ -112,7 +112,7 @@ class _GettingEDataState extends State<GettingEData> {
                     print("la ville : $val");
                   },
                   onSaved: (val) {
-                    print("$val ////////");
+                    print("$val");
                   },
                 ),
               ),

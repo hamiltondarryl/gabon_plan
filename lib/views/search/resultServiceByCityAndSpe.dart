@@ -4,25 +4,25 @@ import 'package:flutter/material.dart';
 import 'package:gabon_plan/config/colorsSys.dart';
 import 'package:gabon_plan/helpers/functions.dart';
 import 'package:gabon_plan/models/points.dart';
-import 'package:gabon_plan/views/gettingData.dart';
+import 'package:gabon_plan/views/gettingdataS.dart';
 import 'package:gabon_plan/widgets/appbar.dart';
 import 'package:gabon_plan/widgets/cardPharmaListMed.dart';
 import 'package:gabon_plan/widgets/drawer.dart';
 
-class ResultMedicalByCityAndSpe extends StatefulWidget {
+class ResultServiceByCityAndSpe extends StatefulWidget {
   final String ville;
   final String categorie;
   final List<PointlModel> data;
 
-  const ResultMedicalByCityAndSpe(
+  const ResultServiceByCityAndSpe(
       {required this.ville, required this.categorie, required this.data});
 
   @override
-  _ResultMedicalByCityAndSpeState createState() =>
-      _ResultMedicalByCityAndSpeState();
+  _ResultServiceByCityAndSpeState createState() =>
+      _ResultServiceByCityAndSpeState();
 }
 
-class _ResultMedicalByCityAndSpeState extends State<ResultMedicalByCityAndSpe> {
+class _ResultServiceByCityAndSpeState extends State<ResultServiceByCityAndSpe> {
   TextEditingController controller = TextEditingController();
   String filter = "";
   @override
@@ -46,7 +46,7 @@ class _ResultMedicalByCityAndSpeState extends State<ResultMedicalByCityAndSpe> {
             child: CustomDrawer(),
           ),
           appBar:
-              AppbarCustom(title: "Plan Médical", color: ColorsSys.colorMed),
+              AppbarCustom(title: "Plan Service", color: ColorsSys.colorSer),
           body: Column(
             children: <Widget>[
               Expanded(
@@ -76,19 +76,19 @@ class _ResultMedicalByCityAndSpeState extends State<ResultMedicalByCityAndSpe> {
                                     context,
                                     MaterialPageRoute(
                                         builder: (context) =>
-                                            const GettingData()));
+                                            const GettingDataS()));
                               }),
                           hintText: "Rechercher...",
                           hintStyle: const TextStyle(color: Colors.white),
                           filled: true,
-                          fillColor: ColorsSys.colorMed,
+                          fillColor: ColorsSys.colorSer,
                           enabledBorder: UnderlineInputBorder(
                             borderRadius: BorderRadius.circular(25.7),
-                            borderSide: BorderSide(color: ColorsSys.colorMed),
+                            borderSide: BorderSide(color: ColorsSys.colorSer),
                           ),
                           focusedBorder: OutlineInputBorder(
                             borderRadius: BorderRadius.circular(25.7),
-                            borderSide: BorderSide(color: ColorsSys.colorMed),
+                            borderSide: BorderSide(color: ColorsSys.colorSer),
                           ),
                         ),
                       ),
@@ -107,7 +107,7 @@ class _ResultMedicalByCityAndSpeState extends State<ResultMedicalByCityAndSpe> {
                         child: Text(
                       widget.categorie + ' de ${widget.ville}',
                       style:
-                          TextStyle(color: ColorsSys.colorMed, fontSize: 17.0),
+                          TextStyle(color: ColorsSys.colorSer, fontSize: 17.0),
                     ))
                   ],
                 ),
@@ -136,7 +136,7 @@ class _ResultMedicalByCityAndSpeState extends State<ResultMedicalByCityAndSpe> {
                                 horaires: widget.data[index].horaires,
                                 jours: widget.data[index].jours,
                                 image: widget.data[index].image,
-                                color: ColorsSys.colorMed)
+                                color: ColorsSys.colorSer)
                             : const SizedBox.shrink();
                       },
                     )),

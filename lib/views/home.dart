@@ -103,14 +103,6 @@ class _HomeState extends State<Home> {
                           topRight: Radius.circular(50))),
                   child: Column(
                     children: [
-                      TextButton(
-                          onPressed: () {
-                            Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                    builder: (context) => const GettingData()));
-                          },
-                          child: const Text("Clique moi")),
                       Expanded(
                         child: GridView.count(
                           primary: false,

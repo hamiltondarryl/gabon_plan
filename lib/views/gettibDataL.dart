@@ -6,14 +6,14 @@ import 'package:gabon_plan/services/requestS.dart';
 import 'package:gabon_plan/views/search/resultMedicalByCityAndSpe.dart';
 import 'package:select_form_field/select_form_field.dart';
 
-class GettingEData extends StatefulWidget {
-  const GettingEData({Key? key}) : super(key: key);
+class GettingLData extends StatefulWidget {
+  const GettingLData({Key? key}) : super(key: key);
 
   @override
-  _GettingEDataState createState() => _GettingEDataState();
+  _GettingLDataState createState() => _GettingLDataState();
 }
 
-class _GettingEDataState extends State<GettingEData> {
+class _GettingLDataState extends State<GettingLData> {
   final List<Map<String, dynamic>> _villes = [];
   final List<Map<String, dynamic>> _categories = [];
   bool loading = false;
@@ -112,7 +112,7 @@ class _GettingEDataState extends State<GettingEData> {
                     print("la ville : $val");
                   },
                   onSaved: (val) {
-                    print("$val ////////");
+                    print("$val");
                   },
                 ),
               ),

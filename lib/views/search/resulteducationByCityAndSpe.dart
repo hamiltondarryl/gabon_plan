@@ -4,25 +4,26 @@ import 'package:flutter/material.dart';
 import 'package:gabon_plan/config/colorsSys.dart';
 import 'package:gabon_plan/helpers/functions.dart';
 import 'package:gabon_plan/models/points.dart';
-import 'package:gabon_plan/views/gettingData.dart';
+import 'package:gabon_plan/views/gettingDataE.dart';
 import 'package:gabon_plan/widgets/appbar.dart';
 import 'package:gabon_plan/widgets/cardPharmaListMed.dart';
 import 'package:gabon_plan/widgets/drawer.dart';
 
-class ResultMedicalByCityAndSpe extends StatefulWidget {
+class ResultEducationByCityAndSpe extends StatefulWidget {
   final String ville;
   final String categorie;
   final List<PointlModel> data;
 
-  const ResultMedicalByCityAndSpe(
+  const ResultEducationByCityAndSpe(
       {required this.ville, required this.categorie, required this.data});
 
   @override
-  _ResultMedicalByCityAndSpeState createState() =>
-      _ResultMedicalByCityAndSpeState();
+  _ResultEducationByCityAndSpeState createState() =>
+      _ResultEducationByCityAndSpeState();
 }
 
-class _ResultMedicalByCityAndSpeState extends State<ResultMedicalByCityAndSpe> {
+class _ResultEducationByCityAndSpeState
+    extends State<ResultEducationByCityAndSpe> {
   TextEditingController controller = TextEditingController();
   String filter = "";
   @override
@@ -46,7 +47,7 @@ class _ResultMedicalByCityAndSpeState extends State<ResultMedicalByCityAndSpe> {
             child: CustomDrawer(),
           ),
           appBar:
-              AppbarCustom(title: "Plan Médical", color: ColorsSys.colorMed),
+              AppbarCustom(title: "Plan Education", color: ColorsSys.colorPog),
           body: Column(
             children: <Widget>[
               Expanded(
@@ -76,19 +77,19 @@ class _ResultMedicalByCityAndSpeState extends State<ResultMedicalByCityAndSpe> {
                                     context,
                                     MaterialPageRoute(
                                         builder: (context) =>
-                                            const GettingData()));
+                                            const GettingEData()));
                               }),
                           hintText: "Rechercher...",
                           hintStyle: const TextStyle(color: Colors.white),
                           filled: true,
-                          fillColor: ColorsSys.colorMed,
+                          fillColor: ColorsSys.colorPog,
                           enabledBorder: UnderlineInputBorder(
                             borderRadius: BorderRadius.circular(25.7),
-                            borderSide: BorderSide(color: ColorsSys.colorMed),
+                            borderSide: BorderSide(color: ColorsSys.colorPog),
                           ),
                           focusedBorder: OutlineInputBorder(
                             borderRadius: BorderRadius.circular(25.7),
-                            borderSide: BorderSide(color: ColorsSys.colorMed),
+                            borderSide: BorderSide(color: ColorsSys.colorPog),
                           ),
                         ),
                       ),
@@ -107,7 +108,7 @@ class _ResultMedicalByCityAndSpeState extends State<ResultMedicalByCityAndSpe> {
                         child: Text(
                       widget.categorie + ' de ${widget.ville}',
                       style:
-                          TextStyle(color: ColorsSys.colorMed, fontSize: 17.0),
+                          TextStyle(color: ColorsSys.colorPog, fontSize: 17.0),
                     ))
                   ],
                 ),
@@ -136,7 +137,7 @@ class _ResultMedicalByCityAndSpeState extends State<ResultMedicalByCityAndSpe> {
                                 horaires: widget.data[index].horaires,
                                 jours: widget.data[index].jours,
                                 image: widget.data[index].image,
-                                color: ColorsSys.colorMed)
+                                color: ColorsSys.colorPog)
                             : const SizedBox.shrink();
                       },
                     )),

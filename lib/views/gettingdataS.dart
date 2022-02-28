@@ -3,7 +3,7 @@
 import 'package:flutter/material.dart';
 import 'package:gabon_plan/config/colorsSys.dart';
 import 'package:gabon_plan/services/requestS.dart';
-import 'package:gabon_plan/views/search/resultMedicalByCityAndSpe.dart';
+import 'package:gabon_plan/views/search/resultatService.dart';
 import 'package:select_form_field/select_form_field.dart';
 
 class GettingDataS extends StatefulWidget {
@@ -189,7 +189,7 @@ class _GettingDataSState extends State<GettingDataS> {
                         Navigator.push(
                             context,
                             MaterialPageRoute(
-                                builder: (context) => ResultMedicalByCityAndSpe(
+                                builder: (context) => ResultServiceByCityAndSpe(
                                     ville: villeSend,
                                     categorie: specSend,
                                     data: resultat)));

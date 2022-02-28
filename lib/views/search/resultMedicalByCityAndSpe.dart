@@ -1,4 +1,4 @@
-// ignore_for_file: file_names, prefer_typing_uninitialized_variables, use_key_in_widget_constructors, avoid_print
+// ignore_for_file: file_names, prefer_typing_uninitialized_variables, use_key_in_widget_constructors, avoid_print, unnecessary_string_interpolations
 
 import 'package:flutter/material.dart';
 import 'package:gabon_plan/config/colorsSys.dart';
@@ -6,6 +6,7 @@ import 'package:gabon_plan/helpers/functions.dart';
 import 'package:gabon_plan/models/points.dart';
 import 'package:gabon_plan/views/listSpeMe.dart';
 import 'package:gabon_plan/widgets/appbar.dart';
+import 'package:gabon_plan/widgets/cardPharmaListMed.dart';
 import 'package:gabon_plan/widgets/drawer.dart';
 
 class ResultMedicalByCityAndSpe extends StatefulWidget {
@@ -35,11 +36,6 @@ class _ResultMedicalByCityAndSpeState extends State<ResultMedicalByCityAndSpe> {
         filter = controller.text;
       });
     });
-
-
-    print(widget.categorie);
-    print(widget.ville);
-    print(widget.data[0].libelle);
   }
 
 
@@ -105,56 +101,37 @@ class _ResultMedicalByCityAndSpeState extends State<ResultMedicalByCityAndSpe> {
                   ],
                 ),
               ),
-              /*Expanded(
+              Expanded(
                 flex: 4,
                 child: Padding(
                     padding: const EdgeInsets.symmetric(horizontal: 20.0),
-                    child: FutureBuilder(
-                        future: RequestHTTP. fetchAllFilterMedicalForCity(1, widget.id),
-                        builder: (context, snapshot) {
-                          
-                          if (snapshot.connectionState == ConnectionState.done) {
-                               var data ;
-                               data = snapshot.data;
-
-                            if (snapshot.data == null ) {
-                              return const Center(child: Text('Pas de résultats', style: TextStyle(color: Colors.white),));
-                            }else if((snapshot.data.toString()) == "[]"){
-                              return  const Center(child: Text('Pas de résultats', style: TextStyle(color: Colors.white),));
-                            }
-                             else {
-                              return  ListView.builder(
-                                itemCount: data.length,
+                    child: ListView.builder(
+                                itemCount: widget.data.length,
                                 itemBuilder: (ctx, index) {
-                                  return ("${data[index].libelle}")
+                                  return ("${widget.data[index].libelle}")
                                       .toLowerCase()
                                       .contains(filter.toLowerCase())
                                       ? CardPharmaMed(
                                       context: context,
-                                      libelle: data[index].libelle,
-                                      adresse: data[index].adresse,
-                                      ville: data[index].ville,
-                                      email: data[index].email,
-                                      description: data[index].description,
-                                      categorie: data[index].catId,
-                                      lng: data[index].lng,
-                                      lat: data[index].lat,
-                                      contact: data[index].contact,
-                                      horaires: data[index].horaires,
-                                      jours: data[index].jours,
-                                      image: data[index].image,
+                                      libelle: widget.data[index].libelle,
+                                      adresse: widget.data[index].adresse,
+                                      ville: widget.data[index].ville,
+                                      email: widget.data[index].email,
+                                      description: widget.data[index].description,
+                                      categorie: widget.data[index].catId,
+                                      lng: widget.data[index].lng,
+                                      lat: widget.data[index].lat,
+                                      contact: widget.data[index].contact,
+                                      horaires: widget.data[index].horaires,
+                                      jours: widget.data[index].jours,
+                                      image: widget.data[index].image,
                                       color: ColorsSys.colorMed
                                   )
                                       : const SizedBox.shrink();
                                 },
-                              );
-                            }
-                          }  else {
-                            return const Center(child: CircularProgressIndicator()); // loading
-                          }
-                        })
+                              )
                 ),
-              )*/
+              )
             ],
           )),
     );

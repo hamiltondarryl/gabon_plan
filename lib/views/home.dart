@@ -4,7 +4,6 @@ import 'package:gabon_plan/config/imagesSys.dart';
 import 'package:gabon_plan/views/gettingData.dart';
 import 'package:gabon_plan/views/gettingDataE.dart';
 import 'package:gabon_plan/views/gettingDataS.dart';
-import 'package:gabon_plan/views/listSpeE.dart';
 import 'package:gabon_plan/views/listSpeL.dart';
 import 'package:gabon_plan/widgets/cardMenu.dart';
 import 'package:gabon_plan/widgets/drawer.dart';
@@ -104,14 +103,6 @@ class _HomeState extends State<Home> {
                           topRight: Radius.circular(50))),
                   child: Column(
                     children: [
-                      TextButton(
-                          onPressed: () {
-                            Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                    builder: (context) => const GettingData()));
-                          },
-                          child: const Text("Clique moi")),
                       Expanded(
                         child: GridView.count(
                           primary: false,

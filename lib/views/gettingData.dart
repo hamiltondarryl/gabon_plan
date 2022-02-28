@@ -176,11 +176,6 @@ class _GettingDataState extends State<GettingData> {
                       });
                       getVilleAndSpe();
                    
-                      ScaffoldMessenger.of(context).showSnackBar(
-                        SnackBar(
-                            content: Text(
-                                'la ville : ${ville.text} et la specialité : ${categorie.text}')),
-                      );
                       RequestHTTP.fetchAllFilterMedicalForCity(
                               ville: ville.text, cat: categorie.text)
                           .then((resultat) {
@@ -194,13 +189,7 @@ class _GettingDataState extends State<GettingData> {
                           );
                       });
                     }
-                    {
-                      ScaffoldMessenger.of(context).showSnackBar(
-                        const SnackBar(
-                            content: Text(
-                                'Veuiller renseiller tous les champs')),
-                      );
-                    }
+                    
                         },
                         child: 
                             Container(

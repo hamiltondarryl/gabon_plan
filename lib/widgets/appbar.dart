@@ -1,7 +1,6 @@
 // ignore_for_file: must_be_immutable
 
 import 'package:flutter/material.dart';
-import 'package:gabon_plan/views/home.dart';
 
 class AppbarCustom extends StatelessWidget implements PreferredSizeWidget {
 
@@ -19,7 +18,7 @@ class AppbarCustom extends StatelessWidget implements PreferredSizeWidget {
     backgroundColor: Colors.black,
     leading: IconButton(
       icon: Icon(Icons.arrow_back_ios, color: color,),
-      onPressed: () => Navigator.push(context, MaterialPageRoute(builder: (context)=> const Home())),
+      onPressed: () => Navigator.pop(context),
     ),
     iconTheme: IconThemeData(color: color),
     title: Text(

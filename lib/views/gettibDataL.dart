@@ -52,6 +52,10 @@ class _GettingDataLState extends State<GettingDataL> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        backgroundColor: ColorsSys.colorLoi,
+        title: const Text("Choix de ville et categorie"),
+      ),
       backgroundColor: Colors.black,
       body: Container(
         color: Colors.white,

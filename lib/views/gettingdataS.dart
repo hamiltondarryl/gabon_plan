@@ -55,7 +55,7 @@ class _GettingDataSState extends State<GettingDataS> {
       backgroundColor: Colors.black,
       appBar: AppBar(
         backgroundColor: ColorsSys.colorSer,
-        title: const Text("Choix de la ville et de la categorie"),
+        title: const Text("Choix de ville et categorie"),
       ),
       body: Container(
         padding: const EdgeInsets.only(top: 50, left: 20, right: 20),

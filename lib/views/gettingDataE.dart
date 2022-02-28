@@ -52,6 +52,10 @@ class _GettingDataEState extends State<GettingDataE> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        backgroundColor: ColorsSys.colorPog,
+        title: const Text("Liste des spécialites"),
+      ),
       backgroundColor: Colors.black,
       body: Container(
         color: Colors.white,

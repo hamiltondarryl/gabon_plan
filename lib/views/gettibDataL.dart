@@ -3,7 +3,7 @@
 import 'package:flutter/material.dart';
 import 'package:gabon_plan/config/colorsSys.dart';
 import 'package:gabon_plan/services/requestS.dart';
-import 'package:gabon_plan/views/search/resultMedicalByCityAndSpe.dart';
+import 'package:gabon_plan/views/search/resultLoisirByCityAndSpe.dart';
 import 'package:select_form_field/select_form_field.dart';
 
 class GettingLData extends StatefulWidget {
@@ -35,7 +35,7 @@ class _GettingLDataState extends State<GettingLData> {
       });
     });
 
-    RequestHTTP.fetchCategories(categorie: "education_cat").then((tableau) {
+    RequestHTTP.fetchCategories(categorie: "loisir_cat").then((tableau) {
       setState(() {
         tableau.forEach((element) {
           _categories.add({
@@ -189,7 +189,7 @@ class _GettingLDataState extends State<GettingLData> {
                         Navigator.push(
                             context,
                             MaterialPageRoute(
-                                builder: (context) => ResultMedicalByCityAndSpe(
+                                builder: (context) => ResultLoisirByCityAndSpe(
                                     ville: villeSend,
                                     categorie: specSend,
                                     data: resultat)));

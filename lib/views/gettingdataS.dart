@@ -3,7 +3,7 @@
 import 'package:flutter/material.dart';
 import 'package:gabon_plan/config/colorsSys.dart';
 import 'package:gabon_plan/services/requestS.dart';
-import 'package:gabon_plan/views/search/resultatService.dart';
+import 'package:gabon_plan/views/search/resultServiceByCityAndSpe.dart';
 import 'package:select_form_field/select_form_field.dart';
 
 class GettingDataS extends StatefulWidget {
@@ -179,7 +179,7 @@ class _GettingDataSState extends State<GettingDataS> {
                             content: Text(
                                 'la ville : ${ville.text} et la specialité : ${categorie.text}')),
                       );
-                      RequestHTTP.fetchAllFilterMedicalForCity(
+                      RequestHTTP.fetchAllFilterServiceForCity(
                               ville: ville.text, cat: categorie.text)
                           .then((resultat) {
                         setState(() {

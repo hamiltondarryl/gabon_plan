@@ -136,9 +136,9 @@ class RequestHTTP{
   }
 
   //Fonction de recuperation des points service en fonction de la ville
-  static Future<List<PointlModel>> fetchAllFilterServiceForCity(id, cat) async {
+  static Future<List<PointlModel>> fetchAllFilterServiceForCity({ville, cat}) async {
 
-    var url = Uri.parse(URL_BASIC +"resultService.php?ville=$id&cat=$cat");
+    var url = Uri.parse(URL_BASIC +"resultService.php?ville=$ville&cat=$cat");
 
     var request = await http.get(url);
     List <PointlModel> listMedical = [];

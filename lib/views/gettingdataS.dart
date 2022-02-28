@@ -32,7 +32,7 @@ class _GettingDataSState extends State<GettingDataS> {
       });
     });
 
-    RequestHTTP.fetchCategories(categorie: "medical_cat").then((tableau) {
+    RequestHTTP.fetchCategories(categorie: "service_cat").then((tableau) {
       setState(() {
         tableau.forEach((element) {
           _categories.add({

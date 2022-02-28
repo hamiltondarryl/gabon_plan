@@ -3,19 +3,22 @@
 import 'package:flutter/material.dart';
 import 'package:gabon_plan/config/colorsSys.dart';
 import 'package:gabon_plan/services/requestS.dart';
+import 'package:gabon_plan/views/search/resultMedicalByCityAndSpe.dart';
 import 'package:select_form_field/select_form_field.dart';
 
-class GettingDataE extends StatefulWidget {
-  const GettingDataE({Key? key}) : super(key: key);
+class GettingEData extends StatefulWidget {
+  const GettingEData({Key? key}) : super(key: key);
 
   @override
-  _GettingDataEState createState() => _GettingDataEState();
+  _GettingEDataState createState() => _GettingEDataState();
 }
 
-class _GettingDataEState extends State<GettingDataE> {
+class _GettingEDataState extends State<GettingEData> {
   final List<Map<String, dynamic>> _villes = [];
   final List<Map<String, dynamic>> _categories = [];
   bool loading = false;
+  String villeSend = "";
+  String specSend = "";
 
   @override
   void initState() {
@@ -52,13 +55,12 @@ class _GettingDataEState extends State<GettingDataE> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        backgroundColor: ColorsSys.colorPog,
-        title: const Text("Liste des spécialites"),
-      ),
       backgroundColor: Colors.black,
+      appBar: AppBar(
+        backgroundColor: ColorsSys.colorMed,
+        title: const Text("Choix ville et catégorie"),
+      ),
       body: Container(
-        color: Colors.white,
         padding: const EdgeInsets.only(top: 50, left: 20, right: 20),
         child: Form(
           key: _formKey,
@@ -68,6 +70,7 @@ class _GettingDataEState extends State<GettingDataE> {
                 height: 100,
                 width: double.infinity,
                 child: SelectFormField(
+                   style: const TextStyle(color: Colors.white),
                   decoration: InputDecoration(
                     contentPadding: const EdgeInsets.symmetric(
                         vertical: 15.0, horizontal: 20.0),
@@ -76,6 +79,7 @@ class _GettingDataEState extends State<GettingDataE> {
                           BorderSide(color: ColorsSys.colorMed, width: 1.0),
                       borderRadius: BorderRadius.circular(10.0),
                     ),
+                    hintText: 'Choix de la ville',
                     border: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(10.0),
                         borderSide: const BorderSide(color: Colors.white)),
@@ -107,13 +111,16 @@ class _GettingDataEState extends State<GettingDataE> {
                   onChanged: (val) {
                     print("la ville : $val");
                   },
-                  onSaved: (val) => print(val),
+                  onSaved: (val) {
+                     print("$val ////////");
+                  },
                 ),
               ),
               Container(
                 height: 100,
                 width: double.infinity,
                 child: SelectFormField(
+                  style: const TextStyle(color: Colors.white),
                   decoration: InputDecoration(
                     contentPadding: const EdgeInsets.symmetric(
                         vertical: 15.0, horizontal: 20.0),
@@ -122,9 +129,11 @@ class _GettingDataEState extends State<GettingDataE> {
                           BorderSide(color: ColorsSys.colorMed, width: 1.0),
                       borderRadius: BorderRadius.circular(10.0),
                     ),
+                    hintText: "Choix de la spécialité",
                     border: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(10.0),
-                        borderSide: const BorderSide(color: Colors.white)),
+                        borderSide:
+                            const BorderSide(color: Colors.white)),
                     // ignore: prefer_const_constructors
                     hintStyle: TextStyle(
                         color: Colors.white, fontWeight: FontWeight.w500),
@@ -153,16 +162,20 @@ class _GettingDataEState extends State<GettingDataE> {
                   onChanged: (val) {
                     print("la specialite : $val");
                   },
-                  onSaved: (val) => print(val),
+                  onSaved: (val) {
+                    print("$val ////////");
+                  },
                 ),
               ),
-              TextButton(
-                  onPressed: () {
+              
+                      GestureDetector(
+                        onTap: () {
                     if (_formKey.currentState!.validate()) {
                       setState(() {
                         loading = !loading;
                       });
-
+                      getVilleAndSpe();
+                   
                       ScaffoldMessenger.of(context).showSnackBar(
                         SnackBar(
                             content: Text(
@@ -174,26 +187,68 @@ class _GettingDataEState extends State<GettingDataE> {
                         setState(() {
                           loading = !loading;
                         });
-                        resultat.forEach((element) {
-                          print(element.libelle);
-                        });
+                       
+                        Navigator.push(context, MaterialPageRoute(builder: (context)=> ResultMedicalByCityAndSpe(
+                          ville: villeSend, categorie: specSend, data: resultat)
+                            )
+                          );
                       });
                     }
                     {
                       ScaffoldMessenger.of(context).showSnackBar(
                         const SnackBar(
-                            content:
-                                Text('Veuiller renseiller tous les champs')),
+                            content: Text(
+                                'Veuiller renseiller tous les champs')),
                       );
                     }
-                  },
-                  child: loading
-                      ? const CircularProgressIndicator()
-                      : const Text("Rechercher"))
+                        },
+                        child: 
+                            Container(
+                              height: 50.0,
+                              width: double.infinity,
+                              decoration: BoxDecoration(
+                                  color: ColorsSys.colorMed,
+                                  borderRadius: BorderRadius.circular(50)),
+                              child: Center(
+                                  child: loading
+                                      ? const CircularProgressIndicator(
+                                    backgroundColor: Colors.red,
+                                  )
+                                      : const Text(
+                                    "CONNEXION",
+                                    textScaleFactor: 1.1,
+                                    style: TextStyle(
+                                        color: Colors.white,
+                                        fontWeight: FontWeight.bold),
+                                  )),
+                            )
+                      ),
             ],
           ),
         ),
       ),
     );
   }
+
+  // recuperat..............
+  void getVilleAndSpe(){
+       _villes.forEach((element) {
+          if (element["value"] == ville.text) {
+            setState(() {
+              villeSend = element["label"];
+            });
+          }
+      });
+
+      _categories.forEach((element) {
+          if (element["value"] == categorie.text) {
+            setState(() {
+              specSend = element["label"];
+            });
+          }
+      });
+
+  }
+
+  
 }

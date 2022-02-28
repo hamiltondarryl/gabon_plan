@@ -1,4 +1,4 @@
-// ignore_for_file: file_names, avoid_unnecessary_containers
+// ignore_for_file: file_names, avoid_unnecessary_containers, avoid_function_literals_in_foreach_calls, sized_box_for_whitespace, avoid_print
 
 import 'package:flutter/material.dart';
 import 'package:gabon_plan/services/requestS.dart';

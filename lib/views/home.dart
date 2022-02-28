@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:gabon_plan/config/colorsSys.dart';
 import 'package:gabon_plan/config/imagesSys.dart';
 import 'package:gabon_plan/views/gettingData.dart';
+import 'package:gabon_plan/views/gettingDataS.dart';
 import 'package:gabon_plan/views/listSpeE.dart';
 import 'package:gabon_plan/views/listSpeL.dart';
 import 'package:gabon_plan/views/listspeS.dart';
@@ -31,7 +32,8 @@ class _HomeState extends State<Home> {
           child: Column(
             children: [
               Container(
-                padding: const EdgeInsets.symmetric(vertical: 30.0, horizontal: 15.0),
+                padding: const EdgeInsets.symmetric(
+                    vertical: 30.0, horizontal: 15.0),
                 height: 300,
                 width: double.infinity,
                 decoration: BoxDecoration(
@@ -39,7 +41,7 @@ class _HomeState extends State<Home> {
                   image: DecorationImage(
                       image: AssetImage(ImageSys.bg),
                       fit: BoxFit.cover,
-                      colorFilter:  ColorFilter.mode(
+                      colorFilter: ColorFilter.mode(
                           Colors.black.withOpacity(0.35), BlendMode.dstATop)),
                 ),
                 child: Column(
@@ -93,58 +95,63 @@ class _HomeState extends State<Home> {
               ),
               Expanded(
                   child: Transform.translate(
-                    offset: const Offset(0, -45),
-                    child: Container(
-                      width: double.infinity,
-                      decoration: const BoxDecoration(
-                          color: Colors.white,
-                          borderRadius: BorderRadius.only(
-                              topLeft: Radius.circular(50),
-                              topRight: Radius.circular(50))),
-                      child: Column(
-                        children: [
-                          TextButton(onPressed: (){
-                                Navigator.push(context, MaterialPageRoute(builder: (context)=> const GettingData()));
-                          }, child: const Text("Clique moi")),
-                          Expanded(
-                            child: GridView.count(
-                              primary: false,
-                              padding: const EdgeInsets.all(50),
-                              crossAxisSpacing: 15,
-                              mainAxisSpacing: 15,
-                              crossAxisCount: 2,
-                              children: <Widget>[
-                                cardMenu(
-                                    context: context,
-                                    title: "Plan Services",
-                                    color: ColorsSys.colorSer,
-                                    image: ImageSys.service,
-                                    page: const ListspeS()),
-                                cardMenu(
-                                    context: context,
-                                    title: "Plan Médical",
-                                    color: ColorsSys.colorMed,
-                                    image: ImageSys.host,
-                                    page: const GettingData() ),
-                                cardMenu(
-                                    context: context,
-                                    title: "Plan Loisirs",
-                                    color: ColorsSys.colorLoi,
-                                    image: ImageSys.cockteil,
-                                    page: const ListSpe()),
-                                cardMenu(
-                                    context: context,
-                                    title: "Plan Education",
-                                    color: ColorsSys.colorPog,
-                                    image: ImageSys.school,
-                                    page: const ListSpeE()),
-                              ],
-                            ),
-                          )
-                        ],
-                      ),
-                    ),
-                  ))
+                offset: const Offset(0, -45),
+                child: Container(
+                  width: double.infinity,
+                  decoration: const BoxDecoration(
+                      color: Colors.white,
+                      borderRadius: BorderRadius.only(
+                          topLeft: Radius.circular(50),
+                          topRight: Radius.circular(50))),
+                  child: Column(
+                    children: [
+                      TextButton(
+                          onPressed: () {
+                            Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => const GettingData()));
+                          },
+                          child: const Text("Clique moi")),
+                      Expanded(
+                        child: GridView.count(
+                          primary: false,
+                          padding: const EdgeInsets.all(50),
+                          crossAxisSpacing: 15,
+                          mainAxisSpacing: 15,
+                          crossAxisCount: 2,
+                          children: <Widget>[
+                            cardMenu(
+                                context: context,
+                                title: "Plan Services",
+                                color: ColorsSys.colorSer,
+                                image: ImageSys.service,
+                                page: const GettingDataS()),
+                            cardMenu(
+                                context: context,
+                                title: "Plan Médical",
+                                color: ColorsSys.colorMed,
+                                image: ImageSys.host,
+                                page: const GettingData()),
+                            cardMenu(
+                                context: context,
+                                title: "Plan Loisirs",
+                                color: ColorsSys.colorLoi,
+                                image: ImageSys.cockteil,
+                                page: const ListSpe()),
+                            cardMenu(
+                                context: context,
+                                title: "Plan Education",
+                                color: ColorsSys.colorPog,
+                                image: ImageSys.school,
+                                page: const ListSpeE()),
+                          ],
+                        ),
+                      )
+                    ],
+                  ),
+                ),
+              ))
             ],
           ),
         ));

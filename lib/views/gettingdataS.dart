@@ -5,14 +5,14 @@ import 'package:gabon_plan/config/colorsSys.dart';
 import 'package:gabon_plan/services/requestS.dart';
 import 'package:select_form_field/select_form_field.dart';
 
-class GettingDataL extends StatefulWidget {
-  const GettingDataL({Key? key}) : super(key: key);
+class GettingDataS extends StatefulWidget {
+  const GettingDataS({Key? key}) : super(key: key);
 
   @override
-  _GettingDataLState createState() => _GettingDataLState();
+  _GettingDataSState createState() => _GettingDataSState();
 }
 
-class _GettingDataLState extends State<GettingDataL> {
+class _GettingDataSState extends State<GettingDataS> {
   final List<Map<String, dynamic>> _villes = [];
   final List<Map<String, dynamic>> _categories = [];
   bool loading = false;
@@ -32,7 +32,7 @@ class _GettingDataLState extends State<GettingDataL> {
       });
     });
 
-    RequestHTTP.fetchCategories(categorie: "loisir_cat").then((tableau) {
+    RequestHTTP.fetchCategories(categorie: "medical_cat").then((tableau) {
       setState(() {
         tableau.forEach((element) {
           _categories.add({
@@ -53,8 +53,11 @@ class _GettingDataLState extends State<GettingDataL> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.black,
+      appBar: AppBar(
+        backgroundColor: ColorsSys.colorSer,
+        title: const Text("Choix de la ville et de la categorie"),
+      ),
       body: Container(
-        color: Colors.white,
         padding: const EdgeInsets.only(top: 50, left: 20, right: 20),
         child: Form(
           key: _formKey,
@@ -63,6 +66,7 @@ class _GettingDataLState extends State<GettingDataL> {
               Container(
                 height: 100,
                 width: double.infinity,
+                color: Colors.white,
                 child: SelectFormField(
                   decoration: InputDecoration(
                     contentPadding: const EdgeInsets.symmetric(
@@ -72,9 +76,10 @@ class _GettingDataLState extends State<GettingDataL> {
                           BorderSide(color: ColorsSys.colorMed, width: 1.0),
                       borderRadius: BorderRadius.circular(10.0),
                     ),
+                    hintText: 'Choix de la ville',
                     border: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(10.0),
-                        borderSide: const BorderSide(color: Colors.black)),
+                        borderSide: const BorderSide(color: Colors.white)),
                     // ignore: prefer_const_constructors
                     hintStyle: TextStyle(
                         color: Colors.white, fontWeight: FontWeight.w500),
@@ -82,7 +87,7 @@ class _GettingDataLState extends State<GettingDataL> {
                       borderRadius: BorderRadius.circular(10.0),
                       // ignore: prefer_const_constructors
                       borderSide: BorderSide(
-                        color: Colors.black,
+                        color: Colors.white,
                         width: 1.1,
                       ),
                     ),

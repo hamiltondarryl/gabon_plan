@@ -1,11 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:gabon_plan/config/colorsSys.dart';
 import 'package:gabon_plan/config/imagesSys.dart';
+import 'package:gabon_plan/views/gettibDataL.dart';
 import 'package:gabon_plan/views/gettingData.dart';
 import 'package:gabon_plan/views/gettingDataE.dart';
 import 'package:gabon_plan/views/gettingDataS.dart';
-import 'package:gabon_plan/views/listSpeE.dart';
-import 'package:gabon_plan/views/listSpeL.dart';
 import 'package:gabon_plan/widgets/cardMenu.dart';
 import 'package:gabon_plan/widgets/drawer.dart';
 
@@ -137,7 +136,7 @@ class _HomeState extends State<Home> {
                                 title: "Plan Loisirs",
                                 color: ColorsSys.colorLoi,
                                 image: ImageSys.cockteil,
-                                page: const ListSpe()),
+                                page: const GettingLData()),
                             cardMenu(
                                 context: context,
                                 title: "Plan Education",

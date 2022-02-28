@@ -57,7 +57,7 @@ class _GettingEDataState extends State<GettingEData> {
     return Scaffold(
       backgroundColor: Colors.black,
       appBar: AppBar(
-        backgroundColor: ColorsSys.colorMed,
+        backgroundColor: ColorsSys.colorPog,
         title: const Text("Choix ville et catégorie"),
       ),
       body: Container(
@@ -70,13 +70,13 @@ class _GettingEDataState extends State<GettingEData> {
                 height: 100,
                 width: double.infinity,
                 child: SelectFormField(
-                   style: const TextStyle(color: Colors.white),
+                  style: const TextStyle(color: Colors.white),
                   decoration: InputDecoration(
                     contentPadding: const EdgeInsets.symmetric(
                         vertical: 15.0, horizontal: 20.0),
                     focusedBorder: OutlineInputBorder(
                       borderSide:
-                          BorderSide(color: ColorsSys.colorMed, width: 1.0),
+                          BorderSide(color: ColorsSys.colorPog, width: 1.0),
                       borderRadius: BorderRadius.circular(10.0),
                     ),
                     hintText: 'Choix de la ville',
@@ -112,7 +112,7 @@ class _GettingEDataState extends State<GettingEData> {
                     print("la ville : $val");
                   },
                   onSaved: (val) {
-                     print("$val ////////");
+                    print("$val ////////");
                   },
                 ),
               ),
@@ -126,14 +126,13 @@ class _GettingEDataState extends State<GettingEData> {
                         vertical: 15.0, horizontal: 20.0),
                     focusedBorder: OutlineInputBorder(
                       borderSide:
-                          BorderSide(color: ColorsSys.colorMed, width: 1.0),
+                          BorderSide(color: ColorsSys.colorPog, width: 1.0),
                       borderRadius: BorderRadius.circular(10.0),
                     ),
                     hintText: "Choix de la spécialité",
                     border: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(10.0),
-                        borderSide:
-                            const BorderSide(color: Colors.white)),
+                        borderSide: const BorderSide(color: Colors.white)),
                     // ignore: prefer_const_constructors
                     hintStyle: TextStyle(
                         color: Colors.white, fontWeight: FontWeight.w500),
@@ -167,15 +166,14 @@ class _GettingEDataState extends State<GettingEData> {
                   },
                 ),
               ),
-              
-                      GestureDetector(
-                        onTap: () {
+              GestureDetector(
+                  onTap: () {
                     if (_formKey.currentState!.validate()) {
                       setState(() {
                         loading = !loading;
                       });
                       getVilleAndSpe();
-                   
+
                       ScaffoldMessenger.of(context).showSnackBar(
                         SnackBar(
                             content: Text(
@@ -187,42 +185,43 @@ class _GettingEDataState extends State<GettingEData> {
                         setState(() {
                           loading = !loading;
                         });
-                       
-                        Navigator.push(context, MaterialPageRoute(builder: (context)=> ResultMedicalByCityAndSpe(
-                          ville: villeSend, categorie: specSend, data: resultat)
-                            )
-                          );
+
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => ResultMedicalByCityAndSpe(
+                                    ville: villeSend,
+                                    categorie: specSend,
+                                    data: resultat)));
                       });
                     }
                     {
                       ScaffoldMessenger.of(context).showSnackBar(
                         const SnackBar(
-                            content: Text(
-                                'Veuiller renseiller tous les champs')),
+                            content:
+                                Text('Veuiller renseiller tous les champs')),
                       );
                     }
-                        },
-                        child: 
-                            Container(
-                              height: 50.0,
-                              width: double.infinity,
-                              decoration: BoxDecoration(
-                                  color: ColorsSys.colorMed,
-                                  borderRadius: BorderRadius.circular(50)),
-                              child: Center(
-                                  child: loading
-                                      ? const CircularProgressIndicator(
-                                    backgroundColor: Colors.red,
-                                  )
-                                      : const Text(
-                                    "CONNEXION",
-                                    textScaleFactor: 1.1,
-                                    style: TextStyle(
-                                        color: Colors.white,
-                                        fontWeight: FontWeight.bold),
-                                  )),
-                            )
-                      ),
+                  },
+                  child: Container(
+                    height: 50.0,
+                    width: double.infinity,
+                    decoration: BoxDecoration(
+                        color: ColorsSys.colorPog,
+                        borderRadius: BorderRadius.circular(50)),
+                    child: Center(
+                        child: loading
+                            ? const CircularProgressIndicator(
+                                backgroundColor: Colors.red,
+                              )
+                            : const Text(
+                                "CONNEXION",
+                                textScaleFactor: 1.1,
+                                style: TextStyle(
+                                    color: Colors.white,
+                                    fontWeight: FontWeight.bold),
+                              )),
+                  )),
             ],
           ),
         ),
@@ -231,24 +230,21 @@ class _GettingEDataState extends State<GettingEData> {
   }
 
   // recuperat..............
-  void getVilleAndSpe(){
-       _villes.forEach((element) {
-          if (element["value"] == ville.text) {
-            setState(() {
-              villeSend = element["label"];
-            });
-          }
-      });
+  void getVilleAndSpe() {
+    _villes.forEach((element) {
+      if (element["value"] == ville.text) {
+        setState(() {
+          villeSend = element["label"];
+        });
+      }
+    });
 
-      _categories.forEach((element) {
-          if (element["value"] == categorie.text) {
-            setState(() {
-              specSend = element["label"];
-            });
-          }
-      });
-
+    _categories.forEach((element) {
+      if (element["value"] == categorie.text) {
+        setState(() {
+          specSend = element["label"];
+        });
+      }
+    });
   }
-
-  
 }

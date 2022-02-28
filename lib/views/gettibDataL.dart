@@ -3,19 +3,22 @@
 import 'package:flutter/material.dart';
 import 'package:gabon_plan/config/colorsSys.dart';
 import 'package:gabon_plan/services/requestS.dart';
+import 'package:gabon_plan/views/search/resultMedicalByCityAndSpe.dart';
 import 'package:select_form_field/select_form_field.dart';
 
-class GettingDataL extends StatefulWidget {
-  const GettingDataL({Key? key}) : super(key: key);
+class GettingEData extends StatefulWidget {
+  const GettingEData({Key? key}) : super(key: key);
 
   @override
-  _GettingDataLState createState() => _GettingDataLState();
+  _GettingEDataState createState() => _GettingEDataState();
 }
 
-class _GettingDataLState extends State<GettingDataL> {
+class _GettingEDataState extends State<GettingEData> {
   final List<Map<String, dynamic>> _villes = [];
   final List<Map<String, dynamic>> _categories = [];
   bool loading = false;
+  String villeSend = "";
+  String specSend = "";
 
   @override
   void initState() {
@@ -32,7 +35,7 @@ class _GettingDataLState extends State<GettingDataL> {
       });
     });
 
-    RequestHTTP.fetchCategories(categorie: "loisir_cat").then((tableau) {
+    RequestHTTP.fetchCategories(categorie: "education_cat").then((tableau) {
       setState(() {
         tableau.forEach((element) {
           _categories.add({
@@ -52,13 +55,12 @@ class _GettingDataLState extends State<GettingDataL> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.black,
       appBar: AppBar(
         backgroundColor: ColorsSys.colorLoi,
-        title: const Text("Choix de ville et categorie"),
+        title: const Text("Choix ville et catégorie"),
       ),
-      backgroundColor: Colors.black,
       body: Container(
-        color: Colors.white,
         padding: const EdgeInsets.only(top: 50, left: 20, right: 20),
         child: Form(
           key: _formKey,
@@ -68,17 +70,19 @@ class _GettingDataLState extends State<GettingDataL> {
                 height: 100,
                 width: double.infinity,
                 child: SelectFormField(
+                  style: const TextStyle(color: Colors.white),
                   decoration: InputDecoration(
                     contentPadding: const EdgeInsets.symmetric(
                         vertical: 15.0, horizontal: 20.0),
                     focusedBorder: OutlineInputBorder(
                       borderSide:
-                          BorderSide(color: ColorsSys.colorMed, width: 1.0),
+                          BorderSide(color: ColorsSys.colorLoi, width: 1.0),
                       borderRadius: BorderRadius.circular(10.0),
                     ),
+                    hintText: 'Choix de la ville',
                     border: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(10.0),
-                        borderSide: const BorderSide(color: Colors.black)),
+                        borderSide: const BorderSide(color: Colors.white)),
                     // ignore: prefer_const_constructors
                     hintStyle: TextStyle(
                         color: Colors.white, fontWeight: FontWeight.w500),
@@ -86,7 +90,7 @@ class _GettingDataLState extends State<GettingDataL> {
                       borderRadius: BorderRadius.circular(10.0),
                       // ignore: prefer_const_constructors
                       borderSide: BorderSide(
-                        color: Colors.black,
+                        color: Colors.white,
                         width: 1.1,
                       ),
                     ),
@@ -107,24 +111,28 @@ class _GettingDataLState extends State<GettingDataL> {
                   onChanged: (val) {
                     print("la ville : $val");
                   },
-                  onSaved: (val) => print(val),
+                  onSaved: (val) {
+                    print("$val ////////");
+                  },
                 ),
               ),
               Container(
                 height: 100,
                 width: double.infinity,
                 child: SelectFormField(
+                  style: const TextStyle(color: Colors.white),
                   decoration: InputDecoration(
                     contentPadding: const EdgeInsets.symmetric(
                         vertical: 15.0, horizontal: 20.0),
                     focusedBorder: OutlineInputBorder(
                       borderSide:
-                          BorderSide(color: ColorsSys.colorMed, width: 1.0),
+                          BorderSide(color: ColorsSys.colorLoi, width: 1.0),
                       borderRadius: BorderRadius.circular(10.0),
                     ),
+                    hintText: "Choix de la spécialité",
                     border: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(10.0),
-                        borderSide: const BorderSide(color: Colors.black)),
+                        borderSide: const BorderSide(color: Colors.white)),
                     // ignore: prefer_const_constructors
                     hintStyle: TextStyle(
                         color: Colors.white, fontWeight: FontWeight.w500),
@@ -132,7 +140,7 @@ class _GettingDataLState extends State<GettingDataL> {
                       borderRadius: BorderRadius.circular(10.0),
                       // ignore: prefer_const_constructors
                       borderSide: BorderSide(
-                        color: Colors.black,
+                        color: Colors.white,
                         width: 1.1,
                       ),
                     ),
@@ -153,15 +161,18 @@ class _GettingDataLState extends State<GettingDataL> {
                   onChanged: (val) {
                     print("la specialite : $val");
                   },
-                  onSaved: (val) => print(val),
+                  onSaved: (val) {
+                    print("$val ////////");
+                  },
                 ),
               ),
-              TextButton(
-                  onPressed: () {
+              GestureDetector(
+                  onTap: () {
                     if (_formKey.currentState!.validate()) {
                       setState(() {
                         loading = !loading;
                       });
+                      getVilleAndSpe();
 
                       ScaffoldMessenger.of(context).showSnackBar(
                         SnackBar(
@@ -174,9 +185,14 @@ class _GettingDataLState extends State<GettingDataL> {
                         setState(() {
                           loading = !loading;
                         });
-                        resultat.forEach((element) {
-                          print(element.libelle);
-                        });
+
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => ResultMedicalByCityAndSpe(
+                                    ville: villeSend,
+                                    categorie: specSend,
+                                    data: resultat)));
                       });
                     }
                     {
@@ -187,13 +203,48 @@ class _GettingDataLState extends State<GettingDataL> {
                       );
                     }
                   },
-                  child: loading
-                      ? const CircularProgressIndicator()
-                      : const Text("Rechercher"))
+                  child: Container(
+                    height: 50.0,
+                    width: double.infinity,
+                    decoration: BoxDecoration(
+                        color: ColorsSys.colorLoi,
+                        borderRadius: BorderRadius.circular(50)),
+                    child: Center(
+                        child: loading
+                            ? const CircularProgressIndicator(
+                                backgroundColor: Colors.red,
+                              )
+                            : const Text(
+                                "CONNEXION",
+                                textScaleFactor: 1.1,
+                                style: TextStyle(
+                                    color: Colors.white,
+                                    fontWeight: FontWeight.bold),
+                              )),
+                  )),
             ],
           ),
         ),
       ),
     );
+  }
+
+  // recuperat..............
+  void getVilleAndSpe() {
+    _villes.forEach((element) {
+      if (element["value"] == ville.text) {
+        setState(() {
+          villeSend = element["label"];
+        });
+      }
+    });
+
+    _categories.forEach((element) {
+      if (element["value"] == categorie.text) {
+        setState(() {
+          specSend = element["label"];
+        });
+      }
+    });
   }
 }

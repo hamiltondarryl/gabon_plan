@@ -125,7 +125,7 @@ class _GettingDataSState extends State<GettingDataS> {
                     ),
                     border: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(10.0),
-                        borderSide: const BorderSide(color: Colors.black)),
+                        borderSide: const BorderSide(color: Colors.white)),
                     // ignore: prefer_const_constructors
                     hintStyle: TextStyle(
                         color: Colors.white, fontWeight: FontWeight.w500),
@@ -133,7 +133,7 @@ class _GettingDataSState extends State<GettingDataS> {
                       borderRadius: BorderRadius.circular(10.0),
                       // ignore: prefer_const_constructors
                       borderSide: BorderSide(
-                        color: Colors.black,
+                        color: Colors.white,
                         width: 1.1,
                       ),
                     ),

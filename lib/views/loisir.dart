@@ -113,21 +113,7 @@ class _LoisirState extends State<Loisir> {
                               return ("${data[index].libelle}")
                                       .toLowerCase()
                                       .contains(filter.toLowerCase())
-                                  ? CardPharmaMed(
-                                      context: context,
-                                      libelle: data[index].libelle,
-                                      adresse: data[index].adresse,
-                                      ville: data[index].ville,
-                                      email: data[index].email,
-                                      description: data[index].description,
-                                      categorie: data[index].catId,
-                                      lng: data[index].lng,
-                                      lat: data[index].lat,
-                                      contact: data[index].contact,
-                                      horaires: data[index].horaires,
-                                      jours: data[index].jours,
-                                      image: data[index].image,
-                                      color: ColorsSys.colorLoi)
+                                  ? CardPharmaMed(point: data[index],context: context, color: ColorsSys.colorLoi)
                                   : const SizedBox.shrink();
                             },
                           );

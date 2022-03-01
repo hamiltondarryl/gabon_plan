@@ -102,9 +102,9 @@ class RequestHTTP{
 
 
   //Fonction de recuperation des points loisir en fonction de la ville
-  static Future<List<PointlModel>> fetchAllFilterLoisirForCity(id, cat) async {
+  static Future<List<PointlModel>> fetchAllFilterLoisirForCity({ville, cat}) async {
 
-    var url = Uri.parse(URL_BASIC +"resultLoisir.php?ville=$id&cat=$cat");
+    var url = Uri.parse(URL_BASIC +"resultLoisir.php?ville=$ville&cat=$cat");
 
     var request = await http.get(url);
     List <PointlModel> listMedical = [];
@@ -119,9 +119,9 @@ class RequestHTTP{
   }
 
    //Fonction de recuperation des points education en fonction de la ville
-  static Future<List<PointlModel>> fetchAllFilterEducationForCity(id, cat) async {
+  static Future<List<PointlModel>> fetchAllFilterEducationForCity({ville, cat}) async {
 
-    var url = Uri.parse(URL_BASIC +"resultEducation.php?ville=$id&cat=$cat");
+    var url = Uri.parse(URL_BASIC +"resultEducation.php?ville=$ville&cat=$cat");
 
     var request = await http.get(url);
     List <PointlModel> listMedical = [];

@@ -3,6 +3,7 @@
 import 'package:flutter/material.dart';
 import 'package:gabon_plan/config/colorsSys.dart';
 import 'package:gabon_plan/services/requestS.dart';
+import 'package:gabon_plan/views/home.dart';
 import 'package:gabon_plan/views/search/resultLoisirByCityAndSpe.dart';
 import 'package:select_form_field/select_form_field.dart';
 
@@ -57,6 +58,10 @@ class _GettingLDataState extends State<GettingLData> {
     return Scaffold(
       backgroundColor: Colors.black,
       appBar: AppBar(
+        leading: IconButton(
+      icon: const Icon(Icons.arrow_back_ios, color: Colors.white,),
+      onPressed: () => Navigator.push(context, MaterialPageRoute(builder: (context)=> const Home())),
+    ),
         backgroundColor: ColorsSys.colorLoi,
         title: const Text("Choix ville et catégorie"),
       ),
@@ -174,12 +179,8 @@ class _GettingLDataState extends State<GettingLData> {
                       });
                       getVilleAndSpe();
 
-                      ScaffoldMessenger.of(context).showSnackBar(
-                        SnackBar(
-                            content: Text(
-                                'la ville : ${ville.text} et la specialité : ${categorie.text}')),
-                      );
-                      RequestHTTP.fetchAllFilterMedicalForCity(
+                     
+                      RequestHTTP.fetchAllFilterLoisirForCity(
                               ville: ville.text, cat: categorie.text)
                           .then((resultat) {
                         setState(() {
@@ -195,13 +196,7 @@ class _GettingLDataState extends State<GettingLData> {
                                     data: resultat)));
                       });
                     }
-                    {
-                      ScaffoldMessenger.of(context).showSnackBar(
-                        const SnackBar(
-                            content:
-                                Text('Veuiller renseiller tous les champs')),
-                      );
-                    }
+                  
                   },
                   child: Container(
                     height: 50.0,
@@ -212,10 +207,11 @@ class _GettingLDataState extends State<GettingLData> {
                     child: Center(
                         child: loading
                             ? const CircularProgressIndicator(
-                                backgroundColor: Colors.red,
+                              color: Colors.black,
+                                backgroundColor: Colors.white,
                               )
                             : const Text(
-                                "CONNEXION",
+                                "RECHERCHER",
                                 textScaleFactor: 1.1,
                                 style: TextStyle(
                                     color: Colors.white,

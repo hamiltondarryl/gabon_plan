@@ -2,25 +2,11 @@
 import 'package:flutter/material.dart';
 import 'package:gabon_plan/config/colorsSys.dart';
 import 'package:gabon_plan/helpers/functions.dart';
+import 'package:gabon_plan/models/points.dart';
 import 'package:gabon_plan/views/detailsList/detailPoint.dart';
 
 // ignore: non_constant_identifier_names
-Widget CardPharmaLoisir({
-  context,
-  libelle,
-  ville,
-  categorie,
-  adresse,
-  horaires,
-  email,
-  contact,
-  jours,
-  description,
-  lng,
-  lat,
-  image,
-  color,
-})
+Widget CardPharmaLoisir({required PointlModel point ,required BuildContext context,required Color color})
 
 {
   return GestureDetector(
@@ -28,19 +14,7 @@ Widget CardPharmaLoisir({
       Navigator.push(
           context,
           MaterialPageRoute(
-              builder: (context) => Detail(
-                libelle: libelle,
-                adresse: adresse,
-                ville : ville,
-                horaires: horaires,
-                jours: jours,
-                email: email,
-                categorie: categorie,
-                description: description,
-                lng: lng,
-                lat: lat,
-                contact: contact,
-                image: image, site: '', color: color,
+              builder: (context) => Detail( point: point, color: color,
               )));
     },
     child: Column(
@@ -64,7 +38,7 @@ Widget CardPharmaLoisir({
                     const BorderRadius.only(topLeft: Radius.circular(10)),
                     color: Colors.black,
                     image: DecorationImage(
-                        image: NetworkImage(image),
+                        image: NetworkImage(point.image),
                         fit: BoxFit.cover,
                         colorFilter: ColorFilter.mode(
                             Colors.black.withOpacity(0.8), BlendMode.dstATop))),
@@ -79,7 +53,7 @@ Widget CardPharmaLoisir({
                           borderRadius: const BorderRadius.only(
                             topRight: Radius.circular(10),
                           )),
-                      child: Text(categorie,
+                      child: Text(point.catId,
                           style: const TextStyle(
                             color: Colors.white,
                           )),
@@ -96,7 +70,7 @@ Widget CardPharmaLoisir({
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
-                       Helpers.smallSentence(libelle, 35, 30),
+                       Helpers.smallSentence(point.libelle, 35, 30),
                         style: TextStyle(
                           fontSize: 17.0,
                           color: ColorsSys.black,
@@ -122,7 +96,7 @@ Widget CardPharmaLoisir({
                             ),
                             Expanded(
                               child: Text(
-                                Helpers.smallSentence(adresse, 20, 15),
+                                Helpers.smallSentence(point.adresse, 20, 15),
                                 style: TextStyle(
                                   fontSize: 14.0,
                                   color: ColorsSys.black,
@@ -149,7 +123,7 @@ Widget CardPharmaLoisir({
                               width: 10.0,
                             ),
                             Text(
-                              horaires,
+                              point.horaires,
                               style: TextStyle(
                                 fontSize: 14.0,
                                 color: ColorsSys.black,

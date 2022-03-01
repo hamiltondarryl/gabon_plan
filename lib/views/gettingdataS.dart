@@ -3,6 +3,7 @@
 import 'package:flutter/material.dart';
 import 'package:gabon_plan/config/colorsSys.dart';
 import 'package:gabon_plan/services/requestS.dart';
+import 'package:gabon_plan/views/home.dart';
 import 'package:gabon_plan/views/search/resultServiceByCityAndSpe.dart';
 import 'package:select_form_field/select_form_field.dart';
 
@@ -57,6 +58,10 @@ class _GettingDataSState extends State<GettingDataS> {
     return Scaffold(
       backgroundColor: Colors.black,
       appBar: AppBar(
+        leading: IconButton(
+      icon: const Icon(Icons.arrow_back_ios, color: Colors.white,),
+      onPressed: () => Navigator.push(context, MaterialPageRoute(builder: (context)=> const Home())),
+    ),
         backgroundColor: ColorsSys.colorSer,
         title: const Text("Choix ville et catégorie"),
       ),
@@ -174,11 +179,6 @@ class _GettingDataSState extends State<GettingDataS> {
                       });
                       getVilleAndSpe();
 
-                      ScaffoldMessenger.of(context).showSnackBar(
-                        SnackBar(
-                            content: Text(
-                                'la ville : ${ville.text} et la specialité : ${categorie.text}')),
-                      );
                       RequestHTTP.fetchAllFilterServiceForCity(
                               ville: ville.text, cat: categorie.text)
                           .then((resultat) {
@@ -195,13 +195,7 @@ class _GettingDataSState extends State<GettingDataS> {
                                     data: resultat)));
                       });
                     }
-                    {
-                      ScaffoldMessenger.of(context).showSnackBar(
-                        const SnackBar(
-                            content:
-                                Text('Veuiller renseiller tous les champs')),
-                      );
-                    }
+                   
                   },
                   child: Container(
                     height: 50.0,
@@ -212,7 +206,8 @@ class _GettingDataSState extends State<GettingDataS> {
                     child: Center(
                         child: loading
                             ? const CircularProgressIndicator(
-                                backgroundColor: Colors.red,
+                              color: Colors.black,
+                                backgroundColor: Colors.white,
                               )
                             : const Text(
                                 "RECHERCHE",

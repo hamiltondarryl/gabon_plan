@@ -3,7 +3,8 @@
 import 'package:flutter/material.dart';
 import 'package:gabon_plan/config/colorsSys.dart';
 import 'package:gabon_plan/services/requestS.dart';
-import 'package:gabon_plan/views/search/resultMedicalByCityAndSpe.dart';
+import 'package:gabon_plan/views/home.dart';
+import 'package:gabon_plan/views/search/resulteducationByCityAndSpe.dart';
 import 'package:select_form_field/select_form_field.dart';
 
 class GettingEData extends StatefulWidget {
@@ -57,6 +58,10 @@ class _GettingEDataState extends State<GettingEData> {
     return Scaffold(
       backgroundColor: Colors.black,
       appBar: AppBar(
+         leading: IconButton(
+      icon: const Icon(Icons.arrow_back_ios, color: Colors.white,),
+      onPressed: () => Navigator.push(context, MaterialPageRoute(builder: (context)=> const Home())),
+    ),
         backgroundColor: ColorsSys.colorPog,
         title: const Text("Choix ville et catégorie"),
       ),
@@ -174,12 +179,8 @@ class _GettingEDataState extends State<GettingEData> {
                       });
                       getVilleAndSpe();
 
-                      ScaffoldMessenger.of(context).showSnackBar(
-                        SnackBar(
-                            content: Text(
-                                'la ville : ${ville.text} et la specialité : ${categorie.text}')),
-                      );
-                      RequestHTTP.fetchAllFilterMedicalForCity(
+                   
+                      RequestHTTP.fetchAllFilterEducationForCity(
                               ville: ville.text, cat: categorie.text)
                           .then((resultat) {
                         setState(() {
@@ -189,19 +190,13 @@ class _GettingEDataState extends State<GettingEData> {
                         Navigator.push(
                             context,
                             MaterialPageRoute(
-                                builder: (context) => ResultMedicalByCityAndSpe(
+                                builder: (context) => ResultEducationByCityAndSpe(
                                     ville: villeSend,
                                     categorie: specSend,
                                     data: resultat)));
                       });
                     }
-                    {
-                      ScaffoldMessenger.of(context).showSnackBar(
-                        const SnackBar(
-                            content:
-                                Text('Veuiller renseiller tous les champs')),
-                      );
-                    }
+                  
                   },
                   child: Container(
                     height: 50.0,
@@ -212,10 +207,11 @@ class _GettingEDataState extends State<GettingEData> {
                     child: Center(
                         child: loading
                             ? const CircularProgressIndicator(
-                                backgroundColor: Colors.red,
+                              color: Colors.black,
+                                backgroundColor: Colors.white,
                               )
                             : const Text(
-                                "CONNEXION",
+                                "RECHERCHER",
                                 textScaleFactor: 1.1,
                                 style: TextStyle(
                                     color: Colors.white,

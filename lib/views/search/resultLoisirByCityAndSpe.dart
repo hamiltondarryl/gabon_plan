@@ -115,30 +115,19 @@ class _ResultLoisirByCityAndSpeState extends State<ResultLoisirByCityAndSpe> {
                 flex: 4,
                 child: Padding(
                     padding: const EdgeInsets.symmetric(horizontal: 20.0),
-                    child: ListView.builder(
+                    child: widget.data.isNotEmpty ? ListView.builder(
                       itemCount: widget.data.length,
                       itemBuilder: (ctx, index) {
                         return ("${widget.data[index].libelle}")
                                 .toLowerCase()
                                 .contains(filter.toLowerCase())
-                            ? CardPharmaMed(
-                                context: context,
-                                libelle: widget.data[index].libelle,
-                                adresse: widget.data[index].adresse,
-                                ville: widget.data[index].ville,
-                                email: widget.data[index].email,
-                                description: widget.data[index].description,
-                                categorie: widget.data[index].catId,
-                                lng: widget.data[index].lng,
-                                lat: widget.data[index].lat,
-                                contact: widget.data[index].contact,
-                                horaires: widget.data[index].horaires,
-                                jours: widget.data[index].jours,
-                                image: widget.data[index].image,
-                                color: ColorsSys.colorLoi)
+                            ? CardPharmaMed(point: widget.data[index], context: context, color: ColorsSys.colorLoi)
                             : const SizedBox.shrink();
                       },
-                    )),
+                    ) : const Center(
+                        child: Text("Pas de résultat", style: TextStyle(color: Colors.white, fontSize: 20)),
+                      )
+                    ),
               )
             ],
           )),

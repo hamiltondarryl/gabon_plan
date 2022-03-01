@@ -1,27 +1,14 @@
 // ignore_for_file: file_names
+
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:gabon_plan/config/colorsSys.dart';
 import 'package:gabon_plan/helpers/functions.dart';
+import 'package:gabon_plan/models/points.dart';
 import 'package:gabon_plan/views/detailsList/detailPoint.dart';
 
 // ignore: non_constant_identifier_names
-Widget CardPharmaMed({
-  context,
-  libelle,
-  ville,
-  categorie,
-  adresse,
-  horaires,
-  email,
-  contact,
-  jours,
-  description,
-  lng,
-  lat,
-  image,
-  color,
-})
+Widget CardPharmaMed({required PointlModel point ,required BuildContext context ,required Color color})
 
 {
   return GestureDetector(
@@ -29,22 +16,7 @@ Widget CardPharmaMed({
       Navigator.push(
           context,
           MaterialPageRoute(
-              builder: (context) => Detail(
-                libelle: libelle,
-                adresse: adresse,
-                ville : ville,
-                horaires: horaires,
-                jours: jours,
-                email: email,
-                categorie: categorie,
-                description: description,
-                lng: lng,
-                lat: lat,
-                contact: contact,
-                image: image,
-                color: color,
-                site: '',
-              )));
+              builder: (context) => Detail(point: point, color: color,)));
     },
     child: Column(
       children: [
@@ -66,7 +38,7 @@ Widget CardPharmaMed({
                   borderRadius: BorderRadius.only(topLeft: Radius.circular(10))
               ),
               child: CachedNetworkImage(
-              imageUrl:  "https://serveur-sodepsi.com/gabonplan/images/uploads/$image",
+              imageUrl:  "https://serveur-sodepsi.com/gabonplan/images/uploads/${point.image}",
               imageBuilder: (context, imageProvider) => Container(
                 decoration: BoxDecoration(
                   color: Colors.black,
@@ -87,7 +59,7 @@ Widget CardPharmaMed({
                             borderRadius: const BorderRadius.only(
                               topRight: Radius.circular(10),
                             )),
-                        child: Text(categorie,
+                        child: Text(point.catId,
                             style: const TextStyle(
                               color: Colors.white,
                             )),
@@ -108,7 +80,7 @@ Widget CardPharmaMed({
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
-                        Helpers.smallSentence(libelle, 35, 30),
+                        Helpers.smallSentence(point.libelle, 35, 30),
                         style: TextStyle(
                           fontSize: 17.0,
                           color: ColorsSys.black,
@@ -134,7 +106,7 @@ Widget CardPharmaMed({
                             ),
                             Expanded(
                               child: Text(
-                                Helpers.smallSentence(adresse, 20, 15),
+                                Helpers.smallSentence(point.adresse, 20, 15),
                                 style: TextStyle(
                                   fontSize: 14.0,
                                   color: ColorsSys.black,
@@ -162,7 +134,7 @@ Widget CardPharmaMed({
                             ),
                             Expanded(
                               child: Text(
-                                horaires,
+                                point.horaires,
                                 style: TextStyle(
                                   fontSize: 14.0,
                                   color: ColorsSys.black,

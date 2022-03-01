@@ -1,42 +1,19 @@
 // ignore_for_file: file_names, use_key_in_widget_constructors, prefer_typing_uninitialized_variables, unnecessary_null_comparison
+
 import 'package:gabon_plan/helpers/functions.dart';
+import 'package:gabon_plan/models/points.dart';
 import 'package:gabon_plan/views/map/map.dart';
 import 'package:flutter/material.dart';
 import 'package:gabon_plan/config/colorsSys.dart';
 import 'package:gabon_plan/widgets/drawer.dart';
 
 class Detail extends StatefulWidget {
-  final String libelle;
-  final String ville;
-  final String categorie;
-  final String adresse;
-  final String horaires;
-  final String email;
-  final String site;
-  final String description;
-  final String jours;
-  final String contact;
-  final double lng;
-  final double lat;
-  final String image;
+
+  final PointlModel point;
   final Color color;
 
-   const Detail({
-    required this.libelle,
-    required this.ville,
-    required this.categorie,
-    required this.adresse,
-    required this.horaires,
-    required this.email,
-    required this.site,
-    required this.description,
-    required this.jours,
-    required this.contact,
-    required this.lng,
-    required this.lat,
-    required this.image,
-    required this.color
-  });
+
+   const Detail({ required this.point, required this.color});
 
   @override
   _DetailState createState() => _DetailState();
@@ -44,8 +21,6 @@ class Detail extends StatefulWidget {
 
 class _DetailState extends State<Detail> {
   final GlobalKey<ScaffoldState> _drawerKey = GlobalKey();
-  var longitude;
-  var latitude;
 
   @override
   void initState() {
@@ -54,6 +29,8 @@ class _DetailState extends State<Detail> {
 
   @override
   Widget build(BuildContext context) {
+    final point = widget.point;
+    final color = widget.color;
     return Scaffold(
       key: _drawerKey,
       endDrawer: const Drawer(
@@ -70,7 +47,7 @@ class _DetailState extends State<Detail> {
               decoration: BoxDecoration(
                 color: Colors.black,
                 image: DecorationImage(
-                    image: NetworkImage("https://serveur-sodepsi.com/gabonplan/images/uploads/${widget.image}"),
+                    image: NetworkImage("https://serveur-sodepsi.com/gabonplan/images/uploads/${point.image}"),
                     fit: BoxFit.cover,
                     colorFilter:  ColorFilter.mode(
                         Colors.black.withOpacity(0.35), BlendMode.dstATop)),
@@ -86,7 +63,7 @@ class _DetailState extends State<Detail> {
                       IconButton(
                           icon: Icon(
                             Icons.arrow_back_ios,
-                            color: widget.color,
+                            color: color,
                           ),
                           onPressed: () => Navigator.pop(context)),
                       IconButton(
@@ -105,7 +82,7 @@ class _DetailState extends State<Detail> {
                   ),
                   const SizedBox(height: 10.0),
                   Text(
-                    widget.libelle,
+                    point.libelle,
                     textAlign: TextAlign.center,
                     style: const TextStyle(
                         color: Colors.white,
@@ -115,7 +92,7 @@ class _DetailState extends State<Detail> {
                   const SizedBox(height: 30),
                   Expanded(
                     child: Text(
-                      widget.description,
+                      point.description,
                       textAlign: TextAlign.center,
                       style: const TextStyle(
                         color: Colors.white,
@@ -169,7 +146,7 @@ class _DetailState extends State<Detail> {
                                   fontSize: 15.0),
                             ),
                             Expanded(
-                                child: Text(widget.adresse,
+                                child: Text(point.adresse,
                                     style: TextStyle(
                                         color: ColorsSys.black,
                                         fontWeight: FontWeight.bold,
@@ -190,7 +167,7 @@ class _DetailState extends State<Detail> {
                                   fontSize: 15.0),
                             ),
                             Expanded(
-                                child: Text(widget.categorie,
+                                child: Text(point.catId,
                                     style: TextStyle(
                                         color: ColorsSys.black,
                                         fontWeight: FontWeight.bold,
@@ -210,13 +187,13 @@ class _DetailState extends State<Detail> {
                                   fontWeight: FontWeight.bold,
                                   fontSize: 15.0),
                             ),
-                            widget.contact  == "" ?  Expanded(child: Text("Indisponible pour le moment", style:  TextStyle(
+                            point.contact  == "" ?  Expanded(child: Text("Indisponible pour le moment", style:  TextStyle(
                                 color: ColorsSys.black,
                                 fontWeight: FontWeight.bold,
                                 fontSize: 15.0))) : Expanded(
                                 child: InkWell(
-                                  onTap: ()=> Helpers.makePhoneCall(widget.contact),
-                                  child: Text(widget.contact,
+                                  onTap: ()=> Helpers.makePhoneCall(point.contact),
+                                  child: Text(point.contact,
                                       style: TextStyle(
                                           color: ColorsSys.black,
                                           fontWeight: FontWeight.bold,
@@ -237,13 +214,13 @@ class _DetailState extends State<Detail> {
                                   fontWeight: FontWeight.bold,
                                   fontSize: 15.0),
                             ),
-                            widget.email  == "" ?  Expanded(child: Text("Indisponible pour le moment", style:  TextStyle(
+                            point.email  == "" ?  Expanded(child: Text("Indisponible pour le moment", style:  TextStyle(
                                 color: ColorsSys.black,
                                 fontWeight: FontWeight.bold,
                                 fontSize: 15.0))) : Expanded(
                                 child: InkWell(
-                                  onTap:()=> Helpers.makeEmail(widget.email),
-                                  child: Text(widget.email,
+                                  onTap:()=> Helpers.makeEmail(point.email),
+                                  child: Text(point.email,
                                       style: TextStyle(
                                           color: ColorsSys.black,
                                           fontWeight: FontWeight.bold,
@@ -265,11 +242,11 @@ class _DetailState extends State<Detail> {
                                   fontWeight: FontWeight.bold,
                                   fontSize: 15.0),
                             ),
-                            widget.site  == "" ?  Expanded(child: Text("Indisponible pour le moment", style:  TextStyle(
+                            point.site  == "" ?  Expanded(child: Text("Indisponible pour le moment", style:  TextStyle(
                                 color: ColorsSys.black,
                                 fontWeight: FontWeight.bold,
                                 fontSize: 15.0))) : Expanded(
-                                child: Text(  widget.site,
+                                child: Text(  point.site,
                                     style: TextStyle(
                                         color: ColorsSys.black,
                                         fontWeight: FontWeight.bold,
@@ -290,7 +267,7 @@ class _DetailState extends State<Detail> {
                                   fontSize: 15.0),
                             ),
                             Expanded(
-                                child: Text(widget.horaires,
+                                child: Text(point.horaires,
                                     style: TextStyle(
                                         color: ColorsSys.black,
                                         fontWeight: FontWeight.bold,
@@ -311,7 +288,7 @@ class _DetailState extends State<Detail> {
                                   fontSize: 15.0),
                             ),
                             Expanded(
-                                child: Text(widget.jours,
+                                child: Text(point.jours,
                                     style: TextStyle(
                                         color: ColorsSys.black,
                                         fontWeight: FontWeight.bold,
@@ -355,9 +332,9 @@ class _DetailState extends State<Detail> {
               context,
               MaterialPageRoute(
                   builder: (context) => Map(
-                        lng: widget.lng,
-                        lat: widget.lat,
-                        libelle: widget.libelle,
+                        lng: point.lng,
+                        lat: point.lat,
+                        libelle: point.libelle,
                         color: widget.color,
                       )
               )

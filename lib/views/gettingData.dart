@@ -204,7 +204,7 @@ class _GettingDataState extends State<GettingData> {
                                     backgroundColor: Colors.red,
                                   )
                                       : const Text(
-                                    "CONNEXION",
+                                    "RECHERCHER",
                                     textScaleFactor: 1.1,
                                     style: TextStyle(
                                         color: Colors.white,

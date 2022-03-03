@@ -188,13 +188,31 @@ class RequestHTTP{
     // recuperation des 5 points
   static Future<List<PointlModel>> fetchLimit5Point({ table }) async {
 
-    var url = Uri.parse(URL_BASIC +"getLimit5data.php?cat=$table");
+    var url = Uri.parse(URL_BASIC +"getLimit5data.php?table=$table");
 
     var request = await http.get(url);
     List <PointlModel> points = [];
     if(request.statusCode == 200){
       var response = jsonDecode(request.body);
-      var datas = response["data"];
+      var datas = response["datas"];
+      points =  datas.map<PointlModel>((json) => PointlModel.fromJson(json)).toList();
+      return points;
+    }else{
+      return points;
+    }
+  }
+
+
+  // recuperation des 5 points medical
+  static Future<List<PointlModel>> fetchLimit5PointMedical() async {
+
+    var url = Uri.parse(URL_BASIC +"getLimit5DataMedical.php");
+
+    var request = await http.get(url);
+    List <PointlModel> points = [];
+    if(request.statusCode == 200){
+      var response = jsonDecode(request.body);
+      var datas = response["datas"];
       points =  datas.map<PointlModel>((json) => PointlModel.fromJson(json)).toList();
       return points;
     }else{

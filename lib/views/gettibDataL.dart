@@ -1,10 +1,11 @@
-// ignore_for_file: file_names, avoid_print, avoid_unnecessary_containers, avoid_function_literals_in_foreach_calls, unused_field, sized_box_for_whitespace
+// ignore_for_file: file_names, avoid_print, avoid_unnecessary_containers, avoid_function_literals_in_foreach_calls, unused_field, sized_box_for_whitespace, prefer_typing_uninitialized_variables
 
 import 'package:flutter/material.dart';
 import 'package:gabon_plan/config/colorsSys.dart';
 import 'package:gabon_plan/services/requestS.dart';
 import 'package:gabon_plan/views/home.dart';
 import 'package:gabon_plan/views/search/resultLoisirByCityAndSpe.dart';
+import 'package:gabon_plan/widgets/cardPharmaListMed.dart';
 import 'package:select_form_field/select_form_field.dart';
 
 class GettingLData extends StatefulWidget {
@@ -218,6 +219,41 @@ class _GettingLDataState extends State<GettingLData> {
                                     fontWeight: FontWeight.bold),
                               )),
                   )),
+              Container(
+                margin: const EdgeInsets.only(top: 20),
+                height: MediaQuery.of(context).size.height/2.5,
+                width: double.infinity,
+                child: Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 20.0),
+                    child: FutureBuilder(
+                        future: RequestHTTP.fetchLimit5Point(table: "loisir"),
+                        builder: (context, snapshot) {
+                          if (snapshot.connectionState == ConnectionState.done) {
+                            var data ;
+                            data = snapshot.data;
+                            if (snapshot.data == null ) {
+                              return const Center(child: Text('Pas de résultats', style: TextStyle(color: Colors.white),));
+                            }else if((snapshot.data.toString()) == "[]"){
+                              return  const Center(child: Text('Pas de résultats', style: TextStyle(color: Colors.white),));
+                            }
+                            else {
+                              return  ListView.builder(
+                                itemCount: data.length,
+                                itemBuilder: (ctx, index) {
+                                  return CardPharmaMed(
+                                      point: data[index],
+                                      context: context,
+                                      color: ColorsSys.colorLoi);
+
+                                },
+                              );
+                            }
+                          }  else {
+                            return  Center(child: CircularProgressIndicator(backgroundColor: Colors.black,color: ColorsSys.colorLoi,)); // loading
+                          }
+                        })
+                ),
+              )
             ],
           ),
         ),

@@ -2,6 +2,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:gabon_plan/config/colorsSys.dart';
+import 'package:gabon_plan/models/points.dart';
 import 'package:gabon_plan/services/requestS.dart';
 import 'package:gabon_plan/views/home.dart';
 import 'package:gabon_plan/views/search/resultServiceByCityAndSpe.dart';
@@ -20,6 +21,11 @@ class _GettingDataSState extends State<GettingDataS> {
   bool loading = false;
   String villeSend = "";
   String specSend = "";
+  String filter = "";
+  final List<Map<String, dynamic>> _points = [];
+  late final List<PointlModel> data;
+
+  TextEditingController controller = TextEditingController();
 
   @override
   void initState() {
@@ -47,6 +53,16 @@ class _GettingDataSState extends State<GettingDataS> {
         });
       });
     });
+    RequestHTTP.fetchLimit5Point(table: "Service-cat").then((tableau) {
+      setState(() {
+        tableau.forEach((element) {
+          _points.add({
+            'value': element.id,
+            'label': element.libelle,
+          });
+        });
+      });
+    });
   }
 
   TextEditingController ville = TextEditingController();
@@ -59,9 +75,13 @@ class _GettingDataSState extends State<GettingDataS> {
       backgroundColor: Colors.black,
       appBar: AppBar(
         leading: IconButton(
-      icon: const Icon(Icons.arrow_back_ios, color: Colors.white,),
-      onPressed: () => Navigator.push(context, MaterialPageRoute(builder: (context)=> const Home())),
-    ),
+          icon: const Icon(
+            Icons.arrow_back_ios,
+            color: Colors.white,
+          ),
+          onPressed: () => Navigator.push(
+              context, MaterialPageRoute(builder: (context) => const Home())),
+        ),
         backgroundColor: ColorsSys.colorSer,
         title: const Text("Choix ville et catégorie"),
       ),
@@ -195,7 +215,6 @@ class _GettingDataSState extends State<GettingDataS> {
                                     data: resultat)));
                       });
                     }
-                   
                   },
                   child: Container(
                     height: 50.0,
@@ -206,7 +225,7 @@ class _GettingDataSState extends State<GettingDataS> {
                     child: Center(
                         child: loading
                             ? const CircularProgressIndicator(
-                              color: Colors.black,
+                                color: Colors.black,
                                 backgroundColor: Colors.white,
                               )
                             : const Text(
@@ -217,6 +236,7 @@ class _GettingDataSState extends State<GettingDataS> {
                                     fontWeight: FontWeight.bold),
                               )),
                   )),
+             
             ],
           ),
         ),
